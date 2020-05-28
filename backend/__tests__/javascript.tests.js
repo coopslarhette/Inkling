@@ -32,7 +32,7 @@ const fixture = {
     'if (true) {\n3 + 4\n} else if (3 < 4) {\n 3 - 4\n} else {\n4+3\n}\n',
     'if (true) {(3 + 4);}else if ((3 < 4)) {(3 - 4);}else{(4+3);};',
   ],
-  Ternary: ['f is Num 3 < 4 ? 5 : 6\n', 'let f_6 = (3 < 4) ? 5 : 6;'],
+  Ternary: ['f is Num 5 if 3 < 4 else 6\n', 'let f_6 = (3 < 4) ? 5 : 6;'],
   WhileLoop: ['while (3 < 4) {\n 3 + 4\n}\n', 'while ((3<4)) {(3+4);};'],
   ForLoop: [
     'for g in [1,2,3] {\n g + 3\n}\n',
