@@ -150,7 +150,7 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   },
 
   // Expressions
-  Exp_ternary(testExp, _1, returnOnTrue, _2, returnOnFalse) {
+  Exp_ternary(returnOnTrue, _1, testExp, _2, returnOnFalse) {
     return new Ternary(testExp.ast(), returnOnTrue.ast(), returnOnFalse.ast())
   },
   Exp0_or(left, op, right) {

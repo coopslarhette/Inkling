@@ -460,7 +460,7 @@ const fixture = {
   ],
 
   ternary: [
-    String.raw`x < 0 ? -1 : 1
+    String.raw`-1 if x < 0 else 1
     `,
     new Program([
       new Ternary(
