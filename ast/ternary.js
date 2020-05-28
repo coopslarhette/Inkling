@@ -19,4 +19,11 @@ module.exports = class Ternary {
     check.expressionsHaveTheSameType(this.consequence.type, this.alt.type)
     this.type = this.consequence.type
   }
+
+  optimize() {
+    this.test = this.test.optimize()
+    this.consequence = this.consequence.optimize()
+    this.alt = this.alt.optimize()
+    return this
+  }
 }
