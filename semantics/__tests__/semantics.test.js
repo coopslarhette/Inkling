@@ -49,9 +49,9 @@ if (5 < 9 and 5 > 0 or f) {
 } else {
   display "good bye"
 }
-1 < 2 ? "Hello" : "good bye"
+"Hello" if 1 < 2 else "good bye"
 function Greeting (h is Text, i is Text) is Text{
-  1 < 2 ? "Hello" : "good bye"
+  "Hello" if 1 < 2 else "good bye"
   display "Hello"
   gimme "hey"
 }
@@ -70,7 +70,7 @@ function checker (j is Num, i is Num) is Num {
   gimme b
 }
 function test (j is Num, i is Num) is Text {
-  1 < 2 ? "Hello" : "good bye"
+  "Hello" if 1 < 2 else "good bye"
   while (j < 5) {
     display j + i
   }

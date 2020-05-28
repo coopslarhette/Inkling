@@ -22,10 +22,6 @@ const errors = [
     'ageDictionary is Dict<Text, Text> {"Sam": 21, "Talia": 20}\n',
   ],
   [
-    'multiple conditional in ternary',
-    '1 < 2 and 3 > 5 ? "hello" : "goodbye"\n',
-  ],
-  [
     'Void function should not have a return statment',
     'function fun1 (h is Num, i is Num) is Void {\ndisplay "hello"\ngimme 4\n}\n',
   ],
@@ -71,7 +67,7 @@ const errors = [
     '  r is Num 0\nwhile (r < 5) {\ndisplay r\ninWhileVar is Text "hello"\n}\ndisplay inWhileVar\n',
   ],
   ['dividing booleans', 'r is Bool true\nj is Bool false\nr / j\n'],
-  ['ternary expression types', 'c is Num true ? 5 : true\n'],
+  ['ternary expression types', '5 if "hello" else 6\n'],
   [
     'assigning to list with wrong member type from function call',
     'function f(x is Num) is List<Num> {\n'
