@@ -65,7 +65,7 @@ const program = String.raw`
     }
 
     function negativeChecker(x is Num) is Bool {
-        gimme x < 0 ? true : false
+        gimme true if x > 0 else false
     }
 
     trueVal is Bool negativeChecker(5)
