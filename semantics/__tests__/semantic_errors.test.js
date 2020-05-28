@@ -67,7 +67,7 @@ const errors = [
     '  r is Num 0\nwhile (r < 5) {\ndisplay r\ninWhileVar is Text "hello"\n}\ndisplay inWhileVar\n',
   ],
   ['dividing booleans', 'r is Bool true\nj is Bool false\nr / j\n'],
-  ['ternary expression types', '5 if "hello" else 6\n'],
+  ['ternary return types must be of same type', 'c is Num 5 if true else true\n'],
   [
     'assigning to list with wrong member type from function call',
     'function f(x is Num) is List<Num> {\n'
