@@ -1,5 +1,7 @@
 const util = require('util')
 const deepEqual = require('deep-equal')
+const Literal = require('../ast/literal')
+
 const {
   ListType,
   NumType,
@@ -123,5 +125,29 @@ module.exports = {
       )
       doCheck(keyFound, 'Invalid key')
     }
+  },
+
+  isZero(e) {
+    return e instanceof Literal && e.value === 0
+  },
+
+  isOne(e) {
+    return e instanceof Literal && e.value === 1
+  },
+
+  bothLiterals(b) {
+    return b.left instanceof Literal && b.right instanceof Literal
+  },
+
+  isNegative(n) {
+    return n instanceof Literal && n.value < 0
+  },
+
+  bothStringLiterals(e) {
+    return this.bothLiterals(e) && e.left.type === TextType && e.right.type === TextType
+  },
+
+  bothBoolLiterals(e) {
+    return this.bothLiterals(e) && e.left.type === BoolType && e.right.type === BoolType
   },
 }
