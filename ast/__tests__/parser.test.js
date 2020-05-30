@@ -9,38 +9,36 @@
  * Based on toal's iki parser.test.js
  */
 const parse = require('../parser')
-const {
-  Program,
-  Block,
-  Assignment,
-  VarDeclaration,
-  Print,
-  ReturnStatement,
-  IfStmt,
-  ForLoop,
-  FuncDecStmt,
-  WhileLoop,
-  FieldVarExp,
-  IdentifierExpression,
-  SubscriptedVarExp,
-  Param,
-  Call,
-  BinaryExpression,
-  PowExp,
-  PrefixExpression,
-  PostfixExpression,
-  ListExpression,
-  KeyValuePair,
-  DictExpression,
-  SetExpression,
-  PrimitiveType,
-  ListType,
-  SetType,
-  DictType,
-  Literal,
-  None,
-  Ternary,
-} = require('../index')
+const Program = require('../program')
+const Block = require('../block')
+const Assignment = require('../assignment')
+const VarDeclaration = require('../var-declaration')
+const Print = require('../print')
+const ReturnStatement = require('../return-statement')
+const IfStmt = require('../if-statement')
+const ForLoop = require('../for-loop')
+const WhileLoop = require('../while-loop')
+const FuncDecStmt = require('../func-dec-statement')
+const ListExpression = require('../list-expression')
+const DictExpression = require('../dict-expression')
+const KeyValuePair = require('../key-value-pair')
+const SetExpression = require('../set-expression')
+const BinaryExpression = require('../binary-expression')
+const IdentifierExpression = require('../identifier-expression')
+const SubscriptedVarExp = require('../subscripted-var-expression')
+const Ternary = require('../ternary')
+const Call = require('../call')
+const Param = require('../param')
+const FieldVarExp = require('../field-var-expression')
+const PowExp = require('../pow-exp')
+const PrefixExpression = require('../prefix-expression')
+const PostfixExpression = require('../postfix-expression')
+const PrimitiveType = require('../primitive-type')
+const ListType = require('../list-type')
+const SetType = require('../set-type')
+const DictType = require('../dict-type')
+const Literal = require('../literal')
+const None = require('../none')
 
 const fixture = {
   textDeclarations: [
@@ -487,7 +485,7 @@ const fixture = {
   ],
 
   subscriptedVarExp: [
-    // just like FieldVarExp it wants the SubscriptedVarExp to
+    // just like FieldVarExp it wants the SubscriptedVaarExp to
     // be wrapped in a IdentifierExpression
     String.raw`inkTeam[420]
     `,
