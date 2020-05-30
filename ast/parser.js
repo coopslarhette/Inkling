@@ -6,40 +6,42 @@
 const fs = require('fs')
 const ohm = require('ohm-js')
 
+const Assignment = require('./assignment')
+const BinaryExpression = require('./binary-expression')
+const Block = require('./block')
+const Call = require('./call')
+const DictExpression = require('./dict-expression')
+const DictType = require('./dict-type')
+const FieldVarExp = require('./field-var-expression')
+const ForLoop = require('./for-loop')
+const FuncDecStmt = require('./func-dec-statement')
+const IdentifierExpression = require('./identifier-expression')
+const IfStmt = require('./if-statement')
+const KeyValuePair = require('./key-value-pair')
+const ListExpression = require('./list-expression')
+const ListType = require('./list-type')
+const Literal = require('./literal')
+const None = require('./none')
+const Param = require('./param')
+const PostfixExpression = require('./postfix-expression')
+const PowExp = require('./pow-exp')
+const PrefixExpression = require('./prefix-expression')
+// const PrimitiveType = require('./primitive-type')
+const Print = require('./print')
+const Program = require('./program')
+const ReturnStatement = require('./return-statement')
+const SetExpression = require('./set-expression')
+const SetType = require('./set-type')
+const SubscriptedVarExp = require('./subscripted-var-expression')
+const Ternary = require('./ternary')
+const VarDeclaration = require('./var-declaration')
+const WhileLoop = require('./while-loop')
+
 const {
-  Program,
-  Block,
-  Assignment,
-  VarDeclaration,
-  Print,
-  ReturnStatement,
-  IfStmt,
-  ForLoop,
-  FuncDecStmt,
-  WhileLoop,
-  FieldVarExp,
-  IdentifierExpression,
-  SubscriptedVarExp,
-  Param,
-  Call,
-  BinaryExpression,
-  PowExp,
-  PrefixExpression,
-  PostfixExpression,
-  ListExpression,
-  KeyValuePair,
-  DictExpression,
-  SetExpression,
   NumType,
   BoolType,
   TextType,
-  ListType,
-  SetType,
-  DictType,
-  Literal,
-  None,
-  Ternary,
-} = require('.')
+} = require('./primitive-types')
 
 const grammar = ohm.grammar(fs.readFileSync('./grammar/Inkling.ohm'))
 
