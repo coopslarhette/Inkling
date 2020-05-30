@@ -18,4 +18,3 @@ module.exports = class FieldVarExp {
     return this
   }
 }
-
