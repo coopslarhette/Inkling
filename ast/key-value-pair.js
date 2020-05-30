@@ -14,6 +14,8 @@ module.exports = class KeyValuePair {
   }
 
   optimize() {
+    this.key = this.key.optimize()
+    this.value = this.value.optimize()
     return this
   }
 }
