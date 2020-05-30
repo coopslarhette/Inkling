@@ -24,4 +24,5 @@
 - there is some issue with primitive types
     - need to figure out where to put them now since they can't go in `index.js` I think
     - need to test I did this correctly
--- figure out how to integrate new node structure from casper
+- figure out how to integrate new node structure from casper
+- run tests to see latest issues
