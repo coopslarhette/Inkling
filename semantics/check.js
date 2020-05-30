@@ -1,19 +1,18 @@
 const util = require('util')
 const deepEqual = require('deep-equal')
 const Literal = require('../ast/literal')
+const ListType = require('../ast/list-type')
+const SetType = require('../ast/set-type')
+const DictType = require('../ast/dict-type')
+const FuncDecStmt = require('../ast/func-dec-statement')
+const IdentifierExpression = require('../ast/identifier-expression')
 
 const {
-  ListType,
   NumType,
   BoolType,
   TextType,
-  SetType,
-  DictType,
-  FuncDecStmt,
-  IdentifierExpression,
-} = require('../ast')
-
-const { NoneType } = require('./builtins')
+  NoneType,
+} = require('./builtins')
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -70,11 +69,9 @@ module.exports = {
   // Can we assign expression to a variable/param/field of type type?
   isAssignableTo(expression, type) {
     doCheck(
-      (deepEqual(type, expression.type, true) && type.constructor === expression.type.constructor)
-      || deepEqual(expression.type, NoneType),
-      `Expression of type ${util.format(
-        expression.type,
-      )} not compatible with type ${util.format(type)}`,
+      //  && type.constructor === expression.type.constructor
+      (deepEqual(type, expression.type, true)) || deepEqual(expression.type, NoneType),
+      `Expression of type ${util.format(expression.type)} not compatible with type ${util.format(type)}`,
     )
   },
 
