@@ -1,32 +1,31 @@
 const check = require('../semantics/check')
+const NoneType = require('../semantics/builtins')
 const DictType = require('./dict-type')
 
 module.exports = class DictExpression {
-  constructor(exp) {
-    Object.assign(this, { exp })
+  constructor(keyValuePairs) {
+    Object.assign(this, { keyValuePairs })
   }
 
   analyze(context) {
-    this.exp.forEach((kvPair) => {
-      kvPair.analyze(context)
+    this.keyValuePairs.forEach((pair) => {
+      pair.analyze(context)
     })
-    if (this.exp.length > 0) {
-      const keyType = this.exp[0].key.type
-      const valueType = this.exp[0].value.type
+    if (this.keyValuePairs.length > 0) {
+      const { keyType, valueType } = this.keyValuePairs[0]
+      this.keyValuePairs.forEach((pair) => {
+        check.expressionsHaveTheSameType(pair.keyType, keyType)
+        check.expressionsHaveTheSameType(pair.valueType, valueType)
+      })
       this.type = new DictType(keyType, valueType)
-      for (let i = 1; i < this.exp.length; i += 1) {
-        check.expressionsHaveTheSameType(this.exp[i].key.type, this.type.keyType)
-        check.expressionsHaveTheSameType(
-          this.exp[i].value.type,
-          this.type.valueType,
-        )
-      }
+    } else {
+      this.type = NoneType
     }
   }
 
   optimize() {
-    this.exp.forEach((kvPair) => {
-      kvPair.optimize()
+    this.keyValuePairs.forEach((pair) => {
+      pair.optimize()
     })
     return this
   }
