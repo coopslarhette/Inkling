@@ -6,7 +6,7 @@ module.exports = class KeyValuePair {
     })
   }
 
-  analyzer() {
+  analyze() {
     this.key.analyze()
     this.value.analyze()
     this.keyType = this.key.type
