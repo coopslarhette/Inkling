@@ -6,7 +6,7 @@
  */
 
 const parse = require('../../ast/parser')
-const analyze = require('../analyzer')
+const Context = require('../context')
 
 const program = String.raw`
 for  var1 in "Hello" {
@@ -50,7 +50,7 @@ if (5 < 9 and 5 > 0 or f) {
   display "good bye"
 }
 "Hello" if 1 < 2 else "good bye"
-function Greeting (h is Text, i is Text) is Text{
+function Greeting (h is Text, i is Text) is Text {
   "Hello" if 1 < 2 else "good bye"
   display "Hello"
   gimme "hey"
@@ -147,7 +147,7 @@ describe('The semantic analyzer', () => {
   test('accepts the mega program with all syntactic forms', (done) => {
     const astRoot = parse(program)
     expect(astRoot).toBeTruthy()
-    analyze(astRoot)
+    astRoot.analyze(Context.INITIAL)
     expect(astRoot).toBeTruthy()
     done()
   })

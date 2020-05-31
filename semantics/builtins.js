@@ -13,7 +13,8 @@ const {
 
 const NoneType = new PrimitiveType('none')
 
-const standardFunctions = [new FuncDecStmt('xProcess', [new Param('code', NumType)], NumType)]
+const standardFunctions = [new FuncDecStmt('xProcess', [new Param('code', NumType)], NumType),
+  new FuncDecStmt('range', [new Param('lower', NumType), new Param('upper', NumType)], new ListType(NumType))]
 
 const textFunctions = [
   new FuncDecStmt(
@@ -30,8 +31,6 @@ const mathFunctions = [
   new FuncDecStmt('sqrt', [new Param('n', NumType)], NumType),
   new FuncDecStmt('random', [new Param('start', NumType), new Param('end', NumType)], NumType),
   new FuncDecStmt('pow', [new Param('base', NumType), new Param('power', NumType)], NumType),
-  new FuncDecStmt('range', [new Param('lower', NumType), new Param('upper', NumType)],
-    new ListType(NumType)),
 ]
 
 const listFunctions = [

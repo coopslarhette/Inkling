@@ -1,34 +1,45 @@
-const check = require('../semantics/check')
+const util = require('util')
+const deepEqual = require('deep-equal')
 const Param = require('./param')
 const ReturnStatement = require('./return-statement')
+const NoneType = require('../semantics/builtins')
 
+const isAssignableTo = (expression, type) => {
+  //  && type.constructor === expression.type.constructor old but might be need after the dust settles
+  if (!(deepEqual(type, expression.type, true)) || deepEqual(expression.type, NoneType)) {
+    throw new Error(`Expression of type ${util.format(expression.type)} not compatible with type ${util.format(type)}`)
+  }
+}
 
 module.exports = class FuncObject {
-  constructor(type, id, params, body) {
+  constructor(returnType, id, params, body) {
     Object.assign(this, {
-      type,
+      returnType,
       id,
       params,
       body,
     })
+    this.id = id
   }
 
   analyze(context) {
     this.params = this.params.map((p) => new Param(p.id, p.type))
     this.params.forEach((p) => p.analyze(context))
+    // this.returnType.analyze()
     this.body.analyze(context)
 
-    const returnStatement = this.body.statements.filter(
-      (b) => b.constructor === ReturnStatement,
+    const returnStatements = this.body.statements.filter(
+      (b) => b instanceof ReturnStatement,
     )
 
-    if (returnStatement.length === 0 && this.type !== 'Void') {
+    if (returnStatements.length === 0 && this.returnType !== 'Void') {
       throw new Error('No return statement found')
-    } else if (returnStatement.length > 0) {
-      if (this.type === 'Void') {
+    } else if (returnStatements.length > 0) {
+      if (this.returnType === 'Void') {
         throw new Error('Void functions do not have return statements')
       }
-      check.isAssignableTo(returnStatement[0], this.type) // bug here TODO: uh is it still here
+      // bug here TODO: uh is it still here
+      isAssignableTo(returnStatements[0], this.returnType)
     }
   }
 }

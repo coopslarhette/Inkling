@@ -41,7 +41,7 @@ const {
   NumType,
   BoolType,
   TextType,
-} = require('./primitive-types')
+} = require('../semantics/builtins')
 
 const grammar = ohm.grammar(fs.readFileSync('./grammar/Inkling.ohm'))
 
