@@ -11,13 +11,13 @@ module.exports = class Call {
 
   analyze(context) {
     this.callee = context.lookupValue(this.id.id)
-    // check.isFunction(this.callee)
+    // check.isFunction(this.callee) TODO
     if (!(this.callee instanceof FuncDecStmt)) {
       throw new Error('Not a function')
     }
     this.args.forEach((arg) => arg.analyze(context))
     check.legalArguments(this.args, this.callee.function.params)
-    this.type = this.callee.function.type
+    this.type = this.callee.function.returnType
   }
 
   optimize() {

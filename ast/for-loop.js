@@ -17,12 +17,12 @@ module.exports = class ForLoop {
     let type
     this.collection.analyze(context)
     check.isIterable(this.collection.type)
-    if (this.collection.type.constructor === ListType
-      || this.collection.type.constructor === SetType) {
+    const typeToCheck = this.collection.type.constructor
+    if (typeToCheck === ListType || typeToCheck === SetType) {
       type = this.collection.type.memberType
-    } else if (this.collection.type.constructor === DictType) {
+    } else if (typeToCheck === DictType) {
       type = this.collection.type.keyType
-      // } else if (this.collection.type.constructor === TextType) {
+      // } else if (typeToCheck === TextType) {
       //   // TODO
       //   type = this.collection.type
     } else {

@@ -7,7 +7,7 @@ module.exports = class IdentifierExpression {
   }
 
   analyze(context) {
-    if (!this.id.id) {
+    if (!this.id.id) { // means an actual IdentifierExp, not this Call wrapping BS
       this.ref = context.lookupValue(this.id)
       this.type = this.ref.type
     } else {
