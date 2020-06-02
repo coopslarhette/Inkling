@@ -13,4 +13,8 @@ module.exports = class ReturnStatement {
     this.returnValue = this.returnValue.optimize()
     return this
   }
+
+  gen() {
+    return `return ${this.returnValue.gen()}`
+  }
 }

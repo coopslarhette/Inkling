@@ -26,4 +26,8 @@ module.exports = class Ternary {
     this.alt = this.alt.optimize()
     return this
   }
+
+  gen() {
+    return `${this.test.gen()} ? ${this.consequence.gen()} : ${this.alt.gen()}`
+  }
 }

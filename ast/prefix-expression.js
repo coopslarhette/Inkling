@@ -31,4 +31,8 @@ module.exports = class PrefixExpression {
     }
     return this
   }
+
+  gen() {
+    return `(${this.op}(${this.operand.gen()}))`
+  }
 }

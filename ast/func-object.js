@@ -41,4 +41,10 @@ module.exports = class FuncObject {
       isAssignableTo(returnStatements[0], this.returnType)
     }
   }
+
+  gen() {
+    const params = `${this.params.map((param) => param.gen())}`
+    const body = this.body.gen()
+    return `( ${params} ){${body} }`
+  }
 }

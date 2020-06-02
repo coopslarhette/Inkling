@@ -27,4 +27,8 @@ module.exports = class Assignment {
     }
     return this
   }
+
+  gen() {
+    return `${this.target.gen()} = ${this.source.gen()}`
+  }
 }

@@ -19,4 +19,9 @@ module.exports = class Block {
     }
     return this.statements.length === 1 ? this.statements[0] : this
   }
+
+  gen() {
+    const statements = this.statements.map((s) => `${s.gen()};`)
+    return statements.join('')
+  }
 }

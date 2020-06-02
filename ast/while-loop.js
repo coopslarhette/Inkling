@@ -22,4 +22,8 @@ module.exports = class WhileLoop {
     this.body = this.body.optimize()
     return this
   }
+
+  gen() {
+    return `while (${this.condition.gen()}) { ${this.body.gen()} }`
+  }
 }

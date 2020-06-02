@@ -35,74 +35,11 @@ const {
   None,
   SubscriptedVarExp,
 } = require('../ast/index')
+
 const {
   TextType,
 } = require('../semantics/builtins')
 
-function makeOp(op) {
-  return (
-    {
-      '==': '===',
-      '!=': '!==',
-      and: '&&',
-      or: '||',
-    }[op] || op
-  )
-}
-
-const javaScriptId = (() => {
-  let lastId = 0
-  const map = new Map()
-  return (v) => {
-    if (!map.has(v)) {
-      map.set(v, ++lastId) // eslint-disable-line no-plusplus
-    }
-    return `${v}_${map.get(v)}`
-  }
-})()
-
-const builtin = {
-  xProcess(code) {
-    return `process.exit(${code})`
-  },
-  slice([s, begin, end]) {
-    return `${s}.slice(${begin}, ${end})`
-  },
-  length([s]) {
-    return `${s}.length`
-  },
-  charAt([s, i]) {
-    return `${s}.charAt(${i})`
-  },
-  abs([x]) {
-    const num = `${x}`.replace(/[()]/g, '')
-    return `Math.abs(${num})`
-  },
-  sqrt([x]) {
-    return `Math.sqrt(${x})`
-  },
-  random([start, end]) {
-    return `Math.floor(Math.random() * ${end} + ${start})`
-  },
-  pow([base, power]) {
-    return `${base}**${power}`
-  },
-  add([listId, value]) {
-    return `${listId.replace(/[''""]/g, '')}.push(${value})`
-  },
-  insert([listId, index, value]) {
-    return `${listId.replace(/[''""]/g, '')}.splice(${index}, 0, ${value})`
-  },
-  prepend([listId, value]) {
-    return `${listId.replace(/[''""]/g, '')}.prepend(${value})`
-  },
-  remove([listId]) {
-    return `${listId.replace(/[''""]/g, '')}.pop()`
-  },
-  range([start, end]) {
-    return `Array(${end} - ${start} + 1).fill().map((_, idx) => ${start} + idx)`
-  },
-}
 
 module.exports = function (exp) {
   return beautify(exp.gen(), { indentSize: 2 })
@@ -114,10 +51,6 @@ Program.prototype.gen = function () {
 
 Literal.prototype.gen = function () {
   return this.type === TextType ? `"${this.value}"` : this.value
-}
-
-Assignment.prototype.gen = function () {
-  return `${this.target.gen()} = ${this.source.gen()}`
 }
 
 IdentifierExpression.prototype.gen = function () {
@@ -138,44 +71,19 @@ Print.prototype.gen = function () {
   return `console.log(${this.exp.gen()})`
 }
 
-DictExpression.prototype.gen = function () {
-  const result = {}
-  const keys = this.exp.map((key) => key.key.gen())
-  const values = this.exp.map((val) => val.value.gen())
-  for (let i = 0; i < keys.length; i += 1) {
-    result[keys[i]] = values[i]
-  }
-  return `{ ${keys.map((k, i) => `${k}: ${values[i]}`).join(', ')} }`
-}
-
 PrefixExpression.prototype.gen = function () {
   return `(${this.op}(${this.operand.gen()}))`
 }
 
-BinaryExpression.prototype.gen = function () {
-  return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`
-}
 
 SetExpression.prototype.gen = function () {
   return `new Set(${this.members.map((member) => member.gen())})`
-}
-
-Block.prototype.gen = function () {
-  const statements = this.statements.map((s) => `${s.gen()};`)
-  return statements.join('')
 }
 
 ListExpression.prototype.gen = function () {
   return `[${this.members.map((m) => m.gen())}]`
 }
 
-Call.prototype.gen = function () {
-  const args = this.args.map((a) => a.gen())
-  if (this.callee.builtin) {
-    return builtin[this.callee.id](args)
-  }
-  return `${this.id.gen()}(${args.join()})`
-}
 
 Param.prototype.gen = function () {
   return javaScriptId(this.id)

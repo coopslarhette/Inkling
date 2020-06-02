@@ -21,4 +21,8 @@ module.exports = class PostfixExpression {
     this.operand.optimize()
     return this
   }
+
+  gen() {
+    return `(((${this.operand.gen()})${this.op}))`
+  }
 }

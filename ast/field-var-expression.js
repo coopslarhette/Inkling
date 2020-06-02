@@ -17,4 +17,9 @@ module.exports = class FieldVarExp {
     this.field = this.field.optimize()
     return this
   }
+
+  // eslint-disable-next-line no-unused-vars,class-methods-use-this
+  gen() {
+    // TODO
+  }
 }

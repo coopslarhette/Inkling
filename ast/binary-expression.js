@@ -5,6 +5,7 @@ const {
   TextType,
 } = require('../semantics/builtins')
 const Literal = require('./literal')
+const genHelp = require('../backend/generator-helpers')
 
 module.exports = class BinaryExpression {
   constructor(op, left, right) {
@@ -77,5 +78,9 @@ module.exports = class BinaryExpression {
       if (this.op === '>') return new Literal(x > y)
     }
     return this
+  }
+
+  gen() {
+    return `(${this.left.gen()} ${genHelp.makeOp(this.op)} ${this.right.gen()})`
   }
 }

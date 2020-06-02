@@ -35,4 +35,17 @@ module.exports = class IfStmt {
     }
     return this
   }
+
+  gen() {
+    let result = `if (${this.tests[0].gen()}) {${this.consequence[0].gen()}}`
+    for (let i = 1; i < this.tests.length; i += 1) {
+      result = result.concat(
+        `else if (${this.tests[i].gen()}) {${this.consequence[i].gen()}}`,
+      )
+    }
+    if (this.alt) {
+      result = result.concat(`else {${this.alt.gen()}}`)
+    }
+    return result
+  }
 }

@@ -21,4 +21,8 @@ module.exports = class ListExpression {
     this.members = this.members.map((m) => m.optimize())
     return this
   }
+
+  gen() {
+    return `[${this.members.map((m) => m.gen())}]`
+  }
 }

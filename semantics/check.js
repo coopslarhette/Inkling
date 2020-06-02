@@ -4,8 +4,7 @@ const Literal = require('../ast/literal')
 const ListType = require('../ast/list-type')
 const SetType = require('../ast/set-type')
 const DictType = require('../ast/dict-type')
-const FuncDecStmt = require('../ast/func-dec-statement')
-const IdentifierExpression = require('../ast/identifier-expression')
+// const IdentifierExpression = require('../ast/identifier-expression')
 
 const {
   NumType,
@@ -50,9 +49,9 @@ module.exports = {
     doCheck(type === BoolType, 'Not a bool')
   },
 
-  isFunction(value) {
-    doCheck(value.constructor === FuncDecStmt, 'Not a function')
-  },
+  // isFunction(value) {
+  //   doCheck(value.constructor === FuncDecStmt, 'Not a function')
+  // },
 
   isNumOrText(type) {
     doCheck(
@@ -70,14 +69,14 @@ module.exports = {
   isAssignableTo(expression, type) {
     doCheck(
       //  && type.constructor === expression.type.constructor
-      (deepEqual(type, expression.type, true)) || deepEqual(expression.type, NoneType),
+      (deepEqual(expression.type, NoneType) || deepEqual(expression.type, type, true)),
       `Expression of type ${util.format(expression.type)} not compatible with type ${util.format(type)}`,
     )
   },
 
   isNotReadOnly(lvalue) {
-    doCheck(
-      !(lvalue.constructor === IdentifierExpression && lvalue.ref.constant),
+    doCheck( // lvalue.constructor === IdentifierExpression &&
+      !(lvalue.ref.constant),
       'Assignment to read-only variable',
     )
   },
@@ -111,15 +110,13 @@ module.exports = {
     args.forEach((arg, i) => this.sameType(arg, params[i]))
   },
 
-  containsKey(id, key) {
-    if (id.type.constructor === ListType) {
-      this.isNum(id.type.memberType)
-      doCheck(id.exp.members.length > key, 'Index out of bounds')
+  containsKey(ref, key) {
+    if (ref.type.constructor === ListType) {
+      this.isNum(ref.type.memberType)
+      doCheck(ref.exp.members.length > key, 'Index out of bounds')
     }
-    if (id.type.constructor === DictType) {
-      const keyFound = id.exp.exp.find(
-        (keyValue) => keyValue.key.value === key,
-      )
+    if (ref.type.constructor === DictType) {
+      const keyFound = ref.exp.keyValuePairs.find((keyValue) => keyValue.key.value === key)
       doCheck(keyFound, 'Invalid key')
     }
   },

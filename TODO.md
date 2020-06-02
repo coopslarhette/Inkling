@@ -26,3 +26,4 @@
     - need to test I did this correctly
 - figure out how to integrate new node structure from casper
 - run tests to see latest issues
+    - now some issue with range builtin,

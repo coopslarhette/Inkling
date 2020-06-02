@@ -28,4 +28,14 @@ module.exports = class DictExpression {
     })
     return this
   }
+
+  gen() {
+    const result = {}
+    const keys = this.keyValuePairs.map((key) => key.key.gen())
+    const values = this.keyValuePairs.map((val) => val.value.gen())
+    for (let i = 0; i < keys.length; i += 1) {
+      result[keys[i]] = values[i]
+    }
+    return `{ ${keys.map((k, i) => `${k}: ${values[i]}`).join(', ')} }`
+  }
 }

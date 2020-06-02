@@ -22,4 +22,8 @@ module.exports = class SetExpression {
     this.members.forEach((m) => m.optimize())
     return this
   }
+
+  gen() {
+    return `new Set(${this.members.map((member) => member.gen())})`
+  }
 }

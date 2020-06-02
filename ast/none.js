@@ -8,4 +8,9 @@ module.exports = class None {
   optimize() {
     return this
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  gen() {
+    return 'null'
+  }
 }

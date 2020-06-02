@@ -1,3 +1,5 @@
+const genHelp = require('../backend/generator-helpers')
+
 module.exports = class Param {
   constructor(id, type) {
     Object.assign(this, {
@@ -12,5 +14,9 @@ module.exports = class Param {
 
   optimize() {
     return this
+  }
+
+  gen() {
+    return genHelp.javaScriptId(this.id)
   }
 }

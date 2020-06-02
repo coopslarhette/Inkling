@@ -10,4 +10,8 @@ module.exports = class Print {
   optimize() {
     return this
   }
+
+  gen() {
+    return `console.log(${this.exp.gen()})`
+  }
 }

@@ -22,4 +22,8 @@ module.exports = class Literal {
   optimize() {
     return this
   }
+
+  gen() {
+    return this.type === TextType ? `"${this.value}"` : this.value
+  }
 }

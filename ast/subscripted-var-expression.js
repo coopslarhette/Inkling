@@ -20,4 +20,8 @@ module.exports = class SubscriptedVarExp {
     this.key = this.key.optimize()
     return this
   }
+
+  gen() {
+    return `${this.id.gen()}[${this.key.gen()}]`
+  }
 }

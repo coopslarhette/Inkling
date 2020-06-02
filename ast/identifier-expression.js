@@ -1,5 +1,6 @@
 const Call = require('./call')
 const SubscriptedVarExp = require('./subscripted-var-expression')
+const genHelp = require('../backend/generator-helpers')
 
 module.exports = class IdentifierExpression {
   constructor(id) {
@@ -23,5 +24,12 @@ module.exports = class IdentifierExpression {
       this.id = this.id.optimize()
     }
     return this
+  }
+
+  gen() {
+    if (typeof this.id === 'object') {
+      return `${this.id.gen()}`
+    }
+    return `${genHelp.javaScriptId(this.id)}`
   }
 }

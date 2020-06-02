@@ -29,4 +29,8 @@ module.exports = class PowExp {
     }
     return this
   }
+
+  gen() {
+    return `${this.left.gen()}**${this.right.gen()}`
+  }
 }
