@@ -7,7 +7,7 @@
 - ~~add more strength reductions to BinaryExp~~
 - ~~another non-trivial optimization not in tiger~~
     - ~~toal suggested 'Can you throw in getting rid of statements after a return maybe? Then you can have the 5 points back. Let me know.'~~
-- subscripted shit still not working (see `doc/dictsListsAndSets.ink`)
+- subscripted shit still not working (see `doc/dictsListsAndSets.ink`) still not working as of 6/1/20
 - some uncompleted analyzers and optimizers; see TODO's
 
 ### Minor
@@ -20,10 +20,4 @@
 
 ### Refactor TODO's
 
-- ~~finish adding all ast node files~~
-- there is some issue with primitive types
-    - need to figure out where to put them now since they can't go in `index.js` I think
-    - need to test I did this correctly
-- figure out how to integrate new node structure from casper
-- run tests to see latest issues
-    - now some issue with range builtin,
+- get 100% test coverage
