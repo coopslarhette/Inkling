@@ -1,4 +1,5 @@
 const check = require('../semantics/check')
+const Literal = require('./literal')
 
 module.exports = class Ternary {
   constructor(test, consequence, alt) {
@@ -24,6 +25,9 @@ module.exports = class Ternary {
     this.test = this.test.optimize()
     this.consequence = this.consequence.optimize()
     this.alt = this.alt.optimize()
+    if (this.test instanceof Literal) {
+      return this.test.value ? this.consequence : this.alt
+    }
     return this
   }
 
