@@ -5,8 +5,8 @@ const ReturnStatement = require('./return-statement')
 const NoneType = require('../semantics/builtins')
 
 const isAssignableTo = (expression, type) => {
-  //  && type.constructor === expression.type.constructor old but might be need after the dust settles
-  if (!((deepEqual(type, expression.type, true) || deepEqual(expression.type, NoneType)) && type.constructor === expression.type.constructor)) {
+  if (!((deepEqual(type, expression.type, true) || deepEqual(expression.type, NoneType))
+    && type.constructor === expression.type.constructor)) {
     throw new Error(`Expression of type ${util.format(expression.type)} not compatible with type ${util.format(type)}`)
   }
 }
@@ -40,6 +40,13 @@ module.exports = class FuncObject {
       // bug here TODO: uh is it still here
       isAssignableTo(returnStatements[0], this.returnType)
     }
+  }
+
+  optimize() {
+    if (this.body) {
+      this.body = this.body.optimize()
+    }
+    return this
   }
 
   gen() {
