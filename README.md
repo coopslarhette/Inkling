@@ -32,8 +32,8 @@ Inkling can currently be transpiled to runnable JavaScript, to do this follow di
 
 - Num
 - Text
-- List
 - Bool
+- List
 - Dict
 - Set
 
