@@ -33,3 +33,4 @@ x is Num findGreatest(3,2,3)
 x is -x
 x is -5
 x is 2 + findGreatest(x, -2, 3)
+h is Num 5 if 1 < 2 else 6
