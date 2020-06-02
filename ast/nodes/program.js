@@ -7,8 +7,6 @@ module.exports = class Program {
 
   analyze(context) {
     this.stmts.forEach((stmt) => {
-      console.log('stmt BEFORE analyze')
-      console.log(stmt)
       stmt.analyze(context)
     })
   }
