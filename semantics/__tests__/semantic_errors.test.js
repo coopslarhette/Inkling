@@ -68,14 +68,12 @@ const errors = [
   ],
   ['dividing booleans', 'r is Bool true\nj is Bool false\nr / j\n'],
   ['ternary return types must be of same type', 'c is Num 5 if true else true\n'],
-  [
-    'assigning to list with wrong member type from function call',
-    'function f(x is Num) is List<Num> {\n'
-    + '  gimme [1,2,x]\n'
-    + '}\n wew is List<Text> f(2)\n'],
+  ['assigning to list with wrong member type', 'ong is List<Text> [1,2,3]\n'],
+  ['assigning to list with wrong member type from function call',
+    'function f(x is Num) is List<Num> {\n gimme \n }\n wew is List<Text> f(2)\n'],
   [
     'returning a list in function that should return a set',
-    'function getSetOfTexts() is Set<Text> {\n  gimme ["!", "1", "dsa"]\n}\n\ntexts is Set<Text> getSetOfTexts()\n'],
+    'function getSetOfTexts() is Set<Text> {\n  gimme ["!", "1", "dsa"]\n}\n texts is Set<Text> getSetOfTexts()\n'],
   ['can\'t iterate nums', 'for i in 5 {\n display 3\n}\n'],
 
   // add necessary types for each node

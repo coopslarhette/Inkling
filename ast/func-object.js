@@ -6,7 +6,7 @@ const NoneType = require('../semantics/builtins')
 
 const isAssignableTo = (expression, type) => {
   //  && type.constructor === expression.type.constructor old but might be need after the dust settles
-  if (!(deepEqual(type, expression.type, true)) || deepEqual(expression.type, NoneType)) {
+  if (!((deepEqual(type, expression.type, true) || deepEqual(expression.type, NoneType)) && type.constructor === expression.type.constructor)) {
     throw new Error(`Expression of type ${util.format(expression.type)} not compatible with type ${util.format(type)}`)
   }
 }
@@ -25,7 +25,6 @@ module.exports = class FuncObject {
   analyze(context) {
     this.params = this.params.map((p) => new Param(p.id, p.type))
     this.params.forEach((p) => p.analyze(context))
-    // this.returnType.analyze()
     this.body.analyze(context)
 
     const returnStatements = this.body.statements.filter(
