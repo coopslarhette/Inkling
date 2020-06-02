@@ -1,8 +1,8 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const {
   NumType,
   BoolType,
-} = require('../semantics/builtins')
+} = require('../../semantics/builtins')
 const Literal = require('./literal')
 
 module.exports = class PrefixExpression {

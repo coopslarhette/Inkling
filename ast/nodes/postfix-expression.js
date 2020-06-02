@@ -1,7 +1,7 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const {
   NumType,
-} = require('../semantics/builtins')
+} = require('../../semantics/builtins')
 
 module.exports = class PostfixExpression {
   constructor(operand, op) {

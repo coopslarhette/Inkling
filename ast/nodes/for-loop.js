@@ -1,9 +1,9 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const VarDeclaration = require('./var-declaration')
 const ListType = require('./list-type')
 const DictType = require('./dict-type')
 const SetType = require('./set-type')
-const genHelp = require('../backend/generator-helpers')
+const genHelp = require('../../backend/generator-helpers')
 
 module.exports = class ForLoop {
   constructor(id, collection, body) {

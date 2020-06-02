@@ -1,4 +1,4 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const FuncDecStmt = require('./func-dec-statement')
 
 const builtin = {

@@ -2,7 +2,7 @@ const {
   NumType,
   BoolType,
   TextType,
-} = require('../semantics/builtins')
+} = require('../../semantics/builtins')
 
 module.exports = class Literal {
   constructor(value) {

@@ -1,4 +1,4 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 
 module.exports = class SubscriptedVarExp {
   constructor(id, key) {

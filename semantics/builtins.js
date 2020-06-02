@@ -1,15 +1,15 @@
-const PrimitiveType = require('../ast/primitive-type')
-const ListType = require('../ast/list-type')
-const SetType = require('../ast/set-type')
-const DictType = require('../ast/dict-type')
-const FuncDecStmt = require('../ast/func-dec-statement')
-const Param = require('../ast/param')
+const PrimitiveType = require('../ast/nodes/primitive-type')
+const ListType = require('../ast/nodes/list-type')
+const SetType = require('../ast/nodes/set-type')
+const DictType = require('../ast/nodes/dict-type')
+const FuncDecStmt = require('../ast/nodes/func-dec-statement')
+const Param = require('../ast/nodes/param')
 
 const {
   NumType,
   TextType,
   BoolType,
-} = require('../ast/primitive-types')
+} = require('../ast/nodes/primitive-types')
 
 const NoneType = new PrimitiveType('none')
 

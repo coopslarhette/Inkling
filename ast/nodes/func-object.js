@@ -2,7 +2,7 @@ const util = require('util')
 const deepEqual = require('deep-equal')
 const Param = require('./param')
 const ReturnStatement = require('./return-statement')
-const NoneType = require('../semantics/builtins')
+const NoneType = require('../../semantics/builtins')
 
 const isAssignableTo = (expression, type) => {
   if (!((deepEqual(type, expression.type, true) || deepEqual(expression.type, NoneType))

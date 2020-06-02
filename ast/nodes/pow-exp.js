@@ -1,5 +1,5 @@
-const check = require('../semantics/check')
-const NumType = require('../semantics/builtins')
+const check = require('../../semantics/check')
+const NumType = require('../../semantics/builtins')
 const Literal = require('./literal')
 
 module.exports = class PowExp {

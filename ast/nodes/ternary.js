@@ -1,4 +1,4 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const Literal = require('./literal')
 
 module.exports = class Ternary {

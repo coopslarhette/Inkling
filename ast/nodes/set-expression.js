@@ -1,4 +1,4 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const SetType = require('./set-type')
 
 module.exports = class SetExpression {

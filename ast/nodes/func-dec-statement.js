@@ -1,5 +1,5 @@
 const FuncObject = require('./func-object')
-const genHelp = require('../backend/generator-helpers')
+const genHelp = require('../../backend/generator-helpers')
 
 module.exports = class FuncDecStmt {
   constructor(id, params, returnType, body) {

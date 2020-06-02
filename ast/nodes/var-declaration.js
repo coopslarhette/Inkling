@@ -1,5 +1,5 @@
-const check = require('../semantics/check')
-const genHelp = require('../backend/generator-helpers')
+const check = require('../../semantics/check')
+const genHelp = require('../../backend/generator-helpers')
 
 module.exports = class VarDeclaration {
   constructor(id, constant, type, exp) {

@@ -1,4 +1,4 @@
-const genHelp = require('../backend/generator-helpers')
+const genHelp = require('../../backend/generator-helpers')
 
 module.exports = class Param {
   constructor(id, type) {

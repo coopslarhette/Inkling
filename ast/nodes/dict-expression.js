@@ -1,4 +1,4 @@
-const check = require('../semantics/check')
+const check = require('../../semantics/check')
 const DictType = require('./dict-type')
 
 module.exports = class DictExpression {

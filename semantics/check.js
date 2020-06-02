@@ -1,9 +1,9 @@
 const util = require('util')
 const deepEqual = require('deep-equal')
-const Literal = require('../ast/literal')
-const ListType = require('../ast/list-type')
-const SetType = require('../ast/set-type')
-const DictType = require('../ast/dict-type')
+const Literal = require('../ast/nodes/literal')
+const ListType = require('../ast/nodes/list-type')
+const SetType = require('../ast/nodes/set-type')
+const DictType = require('../ast/nodes/dict-type')
 // const IdentifierExpression = require('../ast/identifier-expression')
 
 const {
