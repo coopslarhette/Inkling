@@ -79,10 +79,8 @@ const functions = [
   ...dictFunctions,
 ]
 
-functions.forEach((func) => {
-  // eslint-disable-next-line no-param-reassign
-  func.builtin = true
-})
+// eslint-disable-next-line no-param-reassign,no-return-assign
+functions.forEach((func) => { func.builtin = true })
 
 module.exports = {
   NumType,
