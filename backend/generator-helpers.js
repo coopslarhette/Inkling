@@ -21,10 +21,7 @@ const javaScriptId = (() => {
 })()
 
 
-
-
 module.exports = {
   makeOp,
   javaScriptId,
-
 }
