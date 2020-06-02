@@ -8,23 +8,21 @@ const util = require('util')
 const yargs = require('yargs')
 const parse = require('./ast/parser')
 const Context = require('./semantics/context')
-const generate = require('./backend/javascript-generator')
-const optimize = require('./semantics/optimizer')
 
 // If compiling from a string, return the AST, IR, or compiled code as a string.
 function compile(sourceCode, { astOnly, frontEndOnly, shouldOptimize }) {
-  let program = parse(sourceCode)
+  const program = parse(sourceCode)
   if (astOnly) {
     return util.inspect(program, { depth: null })
   }
   program.analyze(Context.INITIAL)
   if (shouldOptimize) {
-    program = optimize(program)
+    program.optimize()
   }
   if (frontEndOnly) {
     return util.inspect(program, { depth: null })
   }
-  return generate(program)
+  return program.gen()
 }
 
 // If compiling from a file, write to standard output.
@@ -37,11 +35,6 @@ function compileFile(filename, options) {
     // eslint-disable-next-line no-console
     console.log(compile(sourceCode, options))
   })
-}
-
-module.exports = {
-  compile,
-  compileFile,
 }
 
 // If running as a script, we have a lot of command line processing to do. The source

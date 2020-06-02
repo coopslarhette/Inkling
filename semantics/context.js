@@ -17,8 +17,6 @@ const {
   NoneType,
 } = require('./builtins')
 
-require('./analyzer')
-
 // When doing semantic analysis we pass around context objects.
 //
 // A context object holds:

@@ -6,8 +6,7 @@
  */
 
 const parse = require('../../ast/parser')
-const analyze = require('../../semantics/analyzer')
-const generate = require('../javascript-generator')
+const Context = require('../../semantics/context')
 
 const fixture = {
   Print: ['display "Hello, world"\n', String.raw`console.log("Hello, world");`],
@@ -91,8 +90,8 @@ describe('The JavaScript generator', () => {
   Object.entries(fixture).forEach(([name, [source, expected]]) => {
     test(`produces the correct output for ${name}`, (done) => {
       const ast = parse(source)
-      analyze(ast)
-      expect(normalize(generate(ast))).toEqual(normalize(expected))
+      ast.analyze(Context.INITIAL)
+      expect(normalize(ast.gen())).toEqual(normalize(expected))
       done()
     })
   })

@@ -8,6 +8,19 @@ You may not know this, but you already know inkling. Inkling is a programming la
 
 Created by Marco B, Cooper LaRhette, Veda Ashok, Sam Gibson, Maya Pegler-Gordon, and Talia Bahar
 
+# Compiling Inkling Code
+
+Inkling can currently be transpiled to runnable JavaScript, to do this follow directions below:
+
+1. Install [Node.js](https://nodejs.org/en/).
+2. Clone the project and run `$ npm install` and then `$ npm test` (in the project directory) to ensure everything is working.
+3. The command to compile inkling code is: `$ node inkling.js [-a] [-o] [-i] <filename>`, where:
+    - `<filename>` is your Inkling code; we have provided `test.ink` and more example files in `docs/`
+    - flags:
+        - the `-a` flag will show the abstract syntax tree after parsing your code and then stop
+        - the `-i` flag will generate and show the decorated abstract syntax tree and then stop
+        - the `-o` flag optimizes your the .js code about to be written to the console (useless if used with other flags)
+
 # Features
 
 - Simple and easy

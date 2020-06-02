@@ -1,17 +1,17 @@
 const util = require('util')
 const deepEqual = require('deep-equal')
+const Literal = require('../ast/literal')
+const ListType = require('../ast/list-type')
+const SetType = require('../ast/set-type')
+const DictType = require('../ast/dict-type')
+// const IdentifierExpression = require('../ast/identifier-expression')
+
 const {
-  ListType,
   NumType,
   BoolType,
   TextType,
-  SetType,
-  DictType,
-  FuncDecStmt,
-  IdentifierExpression,
-} = require('../ast')
-
-const { NoneType } = require('./builtins')
+  NoneType,
+} = require('./builtins')
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -49,9 +49,9 @@ module.exports = {
     doCheck(type === BoolType, 'Not a bool')
   },
 
-  isFunction(value) {
-    doCheck(value.constructor === FuncDecStmt, 'Not a function')
-  },
+  // isFunction(value) {
+  //   doCheck(value.constructor === FuncDecStmt, 'Not a function')
+  // },
 
   isNumOrText(type) {
     doCheck(
@@ -68,17 +68,15 @@ module.exports = {
   // Can we assign expression to a variable/param/field of type type?
   isAssignableTo(expression, type) {
     doCheck(
-      (deepEqual(type, expression.type, true) && type.constructor === expression.type.constructor)
-      || deepEqual(expression.type, NoneType),
-      `Expression of type ${util.format(
-        expression.type,
-      )} not compatible with type ${util.format(type)}`,
+      //  && type.constructor === expression.type.constructor
+      (deepEqual(expression.type, NoneType) || deepEqual(expression.type, type, true)),
+      `Expression of type ${util.format(expression.type)} not compatible with type ${util.format(type)}`,
     )
   },
 
   isNotReadOnly(lvalue) {
-    doCheck(
-      !(lvalue.constructor === IdentifierExpression && lvalue.ref.constant),
+    doCheck( // lvalue.constructor === IdentifierExpression &&
+      !(lvalue.ref.constant),
       'Assignment to read-only variable',
     )
   },
@@ -112,16 +110,38 @@ module.exports = {
     args.forEach((arg, i) => this.sameType(arg, params[i]))
   },
 
-  containsKey(id, key) {
-    if (id.type.constructor === ListType) {
-      this.isNum(id.type.memberType)
-      doCheck(id.exp.members.length > key, 'Index out of bounds')
+  containsKey(ref, key) {
+    if (ref.type.constructor === ListType) {
+      this.isNum(ref.type.memberType)
+      doCheck(ref.exp.members.length > key, 'Index out of bounds')
     }
-    if (id.type.constructor === DictType) {
-      const keyFound = id.exp.exp.find(
-        (keyValue) => keyValue.key.value === key,
-      )
+    if (ref.type.constructor === DictType) {
+      const keyFound = ref.exp.keyValuePairs.find((keyValue) => keyValue.key.value === key)
       doCheck(keyFound, 'Invalid key')
     }
+  },
+
+  isZero(e) {
+    return e instanceof Literal && e.value === 0
+  },
+
+  isOne(e) {
+    return e instanceof Literal && e.value === 1
+  },
+
+  bothLiterals(b) {
+    return b.left instanceof Literal && b.right instanceof Literal
+  },
+
+  isNegative(n) {
+    return n instanceof Literal && n.value < 0
+  },
+
+  bothStringLiterals(e) {
+    return this.bothLiterals(e) && e.left.type === TextType && e.right.type === TextType
+  },
+
+  bothBoolLiterals(e) {
+    return this.bothLiterals(e) && e.left.type === BoolType && e.right.type === BoolType
   },
 }
