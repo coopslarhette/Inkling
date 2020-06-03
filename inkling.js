@@ -11,13 +11,13 @@ const Context = require('./semantics/context')
 
 // If compiling from a string, return the AST, IR, or compiled code as a string.
 function compile(sourceCode, { astOnly, frontEndOnly, shouldOptimize }) {
-  const program = parse(sourceCode)
+  let program = parse(sourceCode)
   if (astOnly) {
     return util.inspect(program, { depth: null })
   }
   program.analyze(Context.INITIAL)
   if (shouldOptimize) {
-    program.optimize()
+    program = program.optimize()
   }
   if (frontEndOnly) {
     return util.inspect(program, { depth: null })
