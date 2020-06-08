@@ -48,39 +48,46 @@ module.exports = class BinaryExpression {
     if (this.op === '+' && check.bothStringLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
       const xy = (x + y).replace(/["]+/g, '')
-      return new Literal(`"${xy}"`)
+      return this.newNode(`"${xy}"`)
     }
-    if (this.op === '!=') return new Literal(this.left.value !== this.right.value)
-    if (this.op === '==') return new Literal(this.left.value === this.right.value)
+    if (this.op === '!=') return this.newNode(this.left.value !== this.right.value)
+    if (this.op === '==') return this.newNode(this.left.value === this.right.value)
     if ((this.op === '+' || this.op === '-') && check.isZero(this.right)) return this.left
     if (this.op === '+' && check.isZero(this.left)) return this.right
     if (this.op === '+' && check.isNegative(this.right)) {
-      return new Literal(this.left.value + this.right.value)
+      return this.newNode(this.left.value + this.right.value)
     }
-    if (this.op === '-' && check.isZero(this.left)) return new Literal(`-${this.right.value}`)
-    if (this.op === '*' && (check.isZero(this.left) || check.isZero(this.right))) return new Literal(0)
+    if (this.op === '-' && check.isZero(this.left)) return this.newNode(`-${this.right.value}`)
+    if (this.op === '*' && (check.isZero(this.left) || check.isZero(this.right))) return this.newNode(0)
     if (this.op === '*' && check.isOne(this.right)) return this.left
     if (this.op === '*' && check.isOne(this.left)) return this.right
     if (check.bothBoolLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      if (this.op === 'and') return new Literal(x && y)
-      if (this.op === 'or') return new Literal(x || y)
+      if (this.op === 'and') return this.newNode(x && y)
+      if (this.op === 'or') return this.newNode(x || y)
     } else if (check.bothLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      if (this.op === '+') return new Literal(x + y)
-      if (this.op === '-') return new Literal(x - y)
-      if (this.op === '*') return new Literal(x * y)
-      if (this.op === '/') return new Literal(x / y)
-      if (this.op === '%') return new Literal(x % y)
-      if (this.op === '<=') return new Literal(x <= y)
-      if (this.op === '>=') return new Literal(x >= y)
-      if (this.op === '<') return new Literal(x < y)
-      if (this.op === '>') return new Literal(x > y)
+      if (this.op === '+') return this.newNode(x + y)
+      if (this.op === '-') return this.newNode(x - y)
+      if (this.op === '*') return this.newNode(x * y)
+      if (this.op === '/') return this.newNode(x / y)
+      if (this.op === '%') return this.newNode(x % y)
+      if (this.op === '<=') return this.newNode(x <= y)
+      if (this.op === '>=') return this.newNode(x >= y)
+      if (this.op === '<') return this.newNode(x < y)
+      if (this.op === '>') return this.newNode(x > y)
     }
     return this
   }
 
   gen() {
     return `(${this.left.gen()} ${genHelp.makeOp(this.op)} ${this.right.gen()})`
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  newNode(exp) {
+    const node = new Literal(exp)
+    node.analyze()
+    return node
   }
 }
