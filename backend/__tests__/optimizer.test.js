@@ -13,47 +13,42 @@ const fixture = {
   ],
 
   andOr: [
-    String.raw`boo twoThreeFour = (2 < 3 and 3 < 4)
-boo trueOrFalse = true or false`,
+    'twoThreeFour is Bool (2 < 3 and 3 < 4)\n trueOrFalse is Bool true or false\n',
     /let twoThreeFour_\d+ = true;\s*let trueOrFalse_\d+ = true;/,
   ],
 
   noOptimization: [
-    String.raw`boo nothing = true`,
-    /let nothing_\d+ = true;/,
+    'nothing is always Bool true\n',
+    /const nothing_\d+ = true;/,
   ],
 
   stringConcatenation: [
-    String.raw`string truth = "forney " + "is " + "a " + "hustler!"`,
+    'truth is Text "forney " + "is " + "a " + "hustler!"\n',
     /let truth_\d+ = "forney is a hustler!";/,
   ],
 
   allBinaryExpressions: [
-    String.raw`if ("toal" == "cool"):
-  0 != 0
-  1 == 1
-  2 is 2
-  0 + 0
-  1 + 0
-  0 + 2
-  0 * 3
-  3 * 0
-  3 * 1
-  1 * 3
-  2 + 2
-  8 - 3
-  3 * 2
-  14 / 2
-  16 // 2
-  19 % 10
-  2 <= 3
-  2 < 3
-  2 >= 3
-  2 > 3
-  "toal = " + "cool"
-  true and true
-  false or false`,
-    /if \(false\) \{\s*false;\s*true;\s*true;\s*0;\s*1;\s*2;\s*0;\s*0;\s*3;\s*3;\s*4;\s*5;\s*6;\s*7;\s*8;\s*9;\s*true;\s*true;\s*false;\s*false;\s*"toal = cool";\s*true;\s*false;\s*\};/,
+    'if ("toal" == "cool") {\n'
+    + '0 != 0\n'
+    + '1 == 1\n'
+    + '0 + 0\n'
+    + '1 + 0\n'
+    + '0 + 2\n'
+    + '0 * 3\n '
+    + '3 * 0\n'
+    + '3 * 1\n'
+    + '1 * 3\n'
+    + '2 + 2\n'
+    + '8 - 3\n'
+    + '3 * 2\n '
+    + '14 / 2\n'
+    + '19 % 10\n'
+    + '2 <= 3\n'
+    + '2 < 3\n '
+    + '2 >= 3\n'
+    + '2 > 3\n'
+    + 'true and true\n}\n',
+    /if \(false\) \{\s*false;\s*true;\s*0;\s*1;\s*2;\s*0;\s*0;\s*3;\s*3;\s*4;\s*5;\s*6;\s*7;\s*9;\s*true;\s*true;\s*false;\s*false;\s*true;\s*\};/,
   ],
 
   unaryExpressions: [
