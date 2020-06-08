@@ -1,12 +1,8 @@
 function makeOp(op) {
-  return (
-    {
-      '==': '===',
-      '!=': '!==',
-      and: '&&',
-      or: '||',
-    }[op] || op
-  )
+  const ops = {
+    '==': '===', '!=': '!==', and: '&&', or: '||',
+  }
+  return ops[op] || op
 }
 
 const javaScriptId = (() => {

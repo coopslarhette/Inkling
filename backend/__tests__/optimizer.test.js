@@ -3,14 +3,13 @@ const Context = require('../../semantics/context')
 
 const fixture = {
   mathBinaryOps: [
-    String.raw`num x = 2 + 3 - 4 * 5 / 2`,
+    'x is Num 2 + 3 - 4 * 5 / 2\n',
     /let x_(\d+) = -5;/,
   ],
 
   ifBoolOperationss: [
-    String.raw`if(4>3):
-  5<3`,
-    /if \(true\) {\s*false;\s*};/,
+    'if (4 > 3) {\n display 5 < 3\n }\n',
+    /if \(true\) {\s*console\.log\(false\);\s*};/,
   ],
 
   andOr: [
@@ -123,14 +122,14 @@ l[12 - 10] = 12 % 7`,
   ],
 }
 
-describe('The Optimize JavaScript generator', () => {
+describe('The JavaScript generator', () => {
   Object.entries(fixture).forEach(([name, [source, expected]]) => {
-    test(`produces the correct output for ${name}`, (done) => {
+    test(`produces the optimized output for ${name}`, (done) => {
       let ast = parse(source)
       ast.analyze(Context.INITIAL)
       ast = ast.optimize()
       // eslint-disable-next-line no-undef
-      expect(generate(ast)).toMatch(expected)
+      expect(ast.gen()).toMatch(expected)
       done()
     })
   })
