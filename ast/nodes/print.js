@@ -8,6 +8,7 @@ module.exports = class Print {
   }
 
   optimize() {
+    this.exp = this.exp.optimize()
     return this
   }
 
