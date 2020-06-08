@@ -47,8 +47,8 @@ module.exports = class BinaryExpression {
     this.right = this.right.optimize()
     if (this.op === '+' && check.bothStringLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      const xy = (x + y).replace(/["]+/g, '')
-      return this.newNode(`"${xy}"`)
+      const xy = (x + y).replace(/"+/g, '')
+      return this.newNode(`${xy}`) // xy use to be wrapped in quotes: "${xy}", may need the quotes idk works as of 6/8
     }
     if (this.op === '!=') return this.newNode(this.left.value !== this.right.value)
     if (this.op === '==') return this.newNode(this.left.value === this.right.value)
