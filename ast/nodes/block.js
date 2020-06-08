@@ -17,11 +17,11 @@ module.exports = class Block {
     if (indexOfReturnStatement >= 0) {
       this.statements = this.statements.slice(0, indexOfReturnStatement + 1)
     }
-    return this.statements.length === 1 ? this.statements[0] : this
+    return this
   }
 
   gen() {
-    const statements = this.statements.map((s) => `${s.gen()};`)
-    return statements.join('')
+    const generatedStatements = this.statements.map((s) => `${s.gen()};`)
+    return generatedStatements.join('')
   }
 }

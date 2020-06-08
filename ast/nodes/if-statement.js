@@ -37,7 +37,7 @@ module.exports = class IfStmt {
   }
 
   gen() {
-    let result = `if (${this.tests[0].gen()}) {${this.consequence[0].gen()};}`
+    let result = `if (${this.tests[0].gen()}) {${this.consequence[0].gen()}}` // issue is here
     for (let i = 1; i < this.tests.length; i += 1) {
       result = result.concat(
         `else if (${this.tests[i].gen()}) {${this.consequence[i].gen()}}`,
