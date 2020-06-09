@@ -84,24 +84,23 @@ const fixture = {
   ],
 
   dictExpression: [
-    String.raw`dict<num, num> numbersAreCool = {1:2, 3:4}`,
-    /let numbersAreCool_\d+ = \{\s*1: 2,\s*3: 4\s*\};/,
+    'numbersAreCool is Dict<Num, Num> {1:2-1, 3-2:4}\n',
+    /let numbersAreCool_\d+ = \{\s*1: 1,\s*1: 4\s*\};/,
   ],
 
   setExpression: [
-    String.raw`set<num> superSet = set(1 + 4, 3 + 3, 12 * 4)`,
+    'superSet is Set<Num> {1 + 4, 3 + 3, 12 * 4}\n',
     /let superSet_\d+ = new Set\(\[\s*5,\s*6,\s*48\s*\]\);/,
   ],
 
   functionAndReturn: [
-    String.raw`num arithmetic():
-  return 1 + 4 - (3 * 3) / (4 // 3)`,
-    /function arithmetic_\d+\(\) \{\s*return -4;\s*\};/,
+    'function arithmetic() is Num {\n gimme 1 + 4 - (3 * 3) / (4 / 3)\n}\n',
+    /function arithmetic_\d+\(\) \{\s*return -1.75;\s*\};/,
   ],
 
   ternary: [
-    String.raw`12 / 4 if (true and false) else 82 // 5`,
-    String.raw`false ? 3 : 16;`,
+    'ong is always Num 12 / 4 if (true and false) else 82 / 5\n',
+    /const ong_\d+ = 16.4;/,
   ],
 }
 
