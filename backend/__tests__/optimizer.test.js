@@ -108,6 +108,11 @@ const fixture = {
     'g is Num 5\n g is g\n',
     /[^.]/,
   ],
+
+  removesStatementsAfterAReturn: [
+    'function f() is Num {\n x is Num 5\n gimme x\n display x\n}\n',
+    /function f_\d+\(\) {\s*let x_(\d+) = 5;\s*return x_\1;\s*};/,
+  ],
 }
 
 describe('The JavaScript generator', () => {
