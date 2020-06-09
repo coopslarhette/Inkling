@@ -16,8 +16,10 @@
 - (maybe) add a generator for arrow functions that generates actually js arrow functions
 - empty lists, sets, and dicts are not assigned a type
 - fix string iteration using a for loop
+- can't have any kind of add, sub, etc operators in subscripted call :(
 
 
 ### Refactor TODO's
 
 - get 100% test coverage
+- get a better generator working for range()
