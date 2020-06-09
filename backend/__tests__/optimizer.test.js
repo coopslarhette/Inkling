@@ -113,6 +113,11 @@ const fixture = {
     'function f() is Num {\n x is Num 5\n gimme x\n display x\n}\n',
     /function f_\d+\(\) {\s*let x_(\d+) = 5;\s*return x_\1;\s*};/,
   ],
+
+  falseConditionalInWhile: [
+    'while (2 > 3) {\n 2+3\n}\n',
+    '',
+  ],
 }
 
 describe('The JavaScript generator', () => {
