@@ -17,6 +17,6 @@ module.exports = class Program {
   }
 
   gen() {
-    return beautify(this.stmts.map((s) => `${s.gen()};`).join(''), { indentSize: 2 })
+    return beautify(this.stmts.map((s) => (s ? `${s.gen()};` : '')).join(''), { indentSize: 2 })
   }
 }

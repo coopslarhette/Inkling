@@ -45,7 +45,7 @@ module.exports = class BinaryExpression {
   optimize() {
     this.left = this.left.optimize()
     this.right = this.right.optimize()
-    if (this.op === '+' && check.bothStringLiterals(this)) {
+    if (check.bothStringLiterals(this) && this.op === '+') {
       const [x, y] = [this.left.value, this.right.value]
       const xy = (x + y).replace(/"+/g, '')
       return check.newLiteral(`${xy}`) // xy use to be wrapped in quotes: "${xy}", may need the quotes idk works as of 6/8
@@ -57,26 +57,31 @@ module.exports = class BinaryExpression {
     if (this.op === '+' && check.isNegative(this.right)) {
       return check.newLiteral(this.left.value + this.right.value)
     }
-    if (this.op === '-' && check.isZero(this.left)) return check.newLiteral(`-${this.right.value}`)
+    if (this.op === '-' && check.isZero(this.left)) return check.newLiteral((-this.right.value))
     if (this.op === '*' && (check.isZero(this.left) || check.isZero(this.right))) return check.newLiteral(0)
     if (this.op === '*' && check.isOne(this.right)) return this.left
     if (this.op === '*' && check.isOne(this.left)) return this.right
     if (check.bothBoolLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      if (this.op === 'and') return check.newLiteral(x && y)
-      if (this.op === 'or') return check.newLiteral(x || y)
-    } else if (check.bothLiterals(this)) {
-      const [x, y] = [this.left.value, this.right.value]
-      if (this.op === '+') return check.newLiteral(x + y)
-      if (this.op === '-') return check.newLiteral(x - y)
-      if (this.op === '*') return check.newLiteral(x * y)
-      if (this.op === '/') return check.newLiteral(x / y)
-      if (this.op === '%') return check.newLiteral(x % y)
-      if (this.op === '<=') return check.newLiteral(x <= y)
-      if (this.op === '>=') return check.newLiteral(x >= y)
-      if (this.op === '<') return check.newLiteral(x < y)
-      if (this.op === '>') return check.newLiteral(x > y)
+      return this.op === 'and' ? check.newLiteral(x && y) : check.newLiteral(x || y)
     }
+    if (check.bothLiterals(this)) {
+      const [x, y] = [this.left.value, this.right.value]
+      // ouuu this is NICE
+      const ops = {
+        '+': check.newLiteral(x + y),
+        '-': check.newLiteral(x - y),
+        '*': check.newLiteral(x * y),
+        '/': check.newLiteral(x / y),
+        '%': check.newLiteral(x % y),
+        '>=': check.newLiteral(x >= y),
+        '<=': check.newLiteral(x <= y),
+        '<': check.newLiteral(x < y),
+        '>': check.newLiteral(x > y),
+      }
+      return ops[this.op]
+    }
+
     return this
   }
 
