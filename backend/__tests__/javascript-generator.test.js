@@ -19,7 +19,7 @@ const fixture = {
   ],
   SetDeclaration: [
     'd is Set<Text> {"name", "Marco", "school", "LMU"}\n',
-    'let d_4 = new Set("name", "Marco", "school", "LMU");',
+    'let d_4 = new Set(["name", "Marco", "school", "LMU"]);',
   ],
   AssignNum: ['e is Num 5\n e is 6\n', 'let e_5 = 5;\n e_5 = 6;\n'],
   If: ['if(true) {\n3 + 4\n}\n', 'if(true) {(3 + 4);};'],

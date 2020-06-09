@@ -102,6 +102,11 @@ const fixture = {
     'ong is always Num 12 / 4 if (true and false) else 82 / 5\n',
     /const ong_\d+ = 16.4;/,
   ],
+
+  assignmentWhereTargetIsSource: [
+    'g is Num 5\n g is g\n',
+    /[^.]/,
+  ],
 }
 
 describe('The JavaScript generator', () => {
