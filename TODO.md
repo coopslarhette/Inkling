@@ -17,6 +17,8 @@
 - empty lists, sets, and dicts are not assigned a type
 - fix string iteration using a for loop
 - can't have any kind of add, sub, etc operators in subscripted call :(
+- change const var-decs to follow `id "always" "is" Type Exp` pattern
+- could add optimization to treat `always` var-decs as literals
 
 
 ### Refactor TODO's

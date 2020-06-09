@@ -4,7 +4,6 @@ const {
   BoolType,
   TextType,
 } = require('../../semantics/builtins')
-const Literal = require('./literal')
 const genHelp = require('../../backend/generator-helpers')
 
 module.exports = class BinaryExpression {
