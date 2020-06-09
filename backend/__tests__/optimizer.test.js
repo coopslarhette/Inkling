@@ -100,8 +100,8 @@ const fixture = {
   ],
 
   ternary: [
-    'ong is always Num 12 / 4 if (true and false) else 82 / 5\n',
-    /const ong_\d+ = 16.4;/,
+    'ong is Num 12 / 4 if (true and false) else 82 / 5\n ong is 12 / 4 if (true) else 82 / 5\n',
+    /let ong_(\d+) = 16.4;\s*ong_\1 = 3;/,
   ],
 
   assignmentWhereTargetIsSource: [
