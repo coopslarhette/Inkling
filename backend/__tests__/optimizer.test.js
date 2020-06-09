@@ -128,6 +128,11 @@ const fixture = {
     '(3+4)++\n',
     '(((7) ++));',
   ],
+
+  ternaryNoOptimization: [
+    'guh is Num 5\n j is Num 6 if guh < 2 else 9\n',
+    /let guh_(\d+) = 5;\s*let j_\d+ = \(guh_\1 < 2\) \? 6 : 9;/,
+  ],
 }
 
 describe('The JavaScript generator', () => {

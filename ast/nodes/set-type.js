@@ -6,8 +6,4 @@ module.exports = class SetType {
   analyze(context) {
     this.memberType.analyze(context)
   }
-
-  optimize() {
-    return this
-  }
 }
