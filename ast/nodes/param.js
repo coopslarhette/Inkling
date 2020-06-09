@@ -12,10 +12,6 @@ module.exports = class Param {
     context.add(this.id, this)
   }
 
-  optimize() {
-    return this
-  }
-
   gen() {
     return genHelp.javaScriptId(this.id)
   }

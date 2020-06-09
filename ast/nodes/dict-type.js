@@ -10,8 +10,4 @@ module.exports = class DictType {
     this.keyType.analyze(context)
     this.valueType.analyze(context)
   }
-
-  optimize() {
-    return this
-  }
 }

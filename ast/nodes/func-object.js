@@ -43,9 +43,7 @@ module.exports = class FuncObject {
   }
 
   optimize() {
-    if (this.body) {
-      this.body = this.body.optimize()
-    }
+    this.body = this.body.optimize()
     return this
   }
 

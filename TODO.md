@@ -19,6 +19,7 @@
 - can't have any kind of add, sub, etc operators in subscripted call :(
 - change const var-decs to follow `id "always" "is" Type Exp` pattern
 - could add optimization to treat `always` var-decs as literals
+- I think beautify is adding spaces in between postfix and prefix ops and operands
 
 
 ### Refactor TODO's

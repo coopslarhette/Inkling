@@ -27,11 +27,8 @@ module.exports = class IfStmt {
   optimize() {
     this.tests = this.tests.map((test) => test.optimize())
     this.consequence = this.consequence.map((consequence) => consequence.optimize())
-    if (this.alternate) {
-      this.alternate = this.alternate.optimize()
-    }
-    if (this.tests.length === 0) {
-      return this.alternate
+    if (this.alt) {
+      this.alt = this.alt.optimize()
     }
     return this
   }

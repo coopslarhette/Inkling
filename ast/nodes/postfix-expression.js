@@ -18,11 +18,12 @@ module.exports = class PostfixExpression {
   }
 
   optimize() {
-    this.operand.optimize()
+    this.operand = this.operand.optimize()
     return this
   }
 
   gen() {
+    // whitespace not being add here
     return `(((${this.operand.gen()})${this.op}))`
   }
 }

@@ -6,8 +6,4 @@ module.exports = class ListType {
   analyze(context) {
     this.memberType.analyze(context)
   }
-
-  optimize() {
-    return this
-  }
 }

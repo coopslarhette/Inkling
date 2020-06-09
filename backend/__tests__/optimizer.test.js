@@ -8,8 +8,8 @@ const fixture = {
   ],
 
   ifBoolOperationss: [
-    'if (4 > 3) {\n display 5 < 3\n }\n',
-    /if \(true\) {\s*console\.log\(false\);\s*};/,
+    'if (4 > 3) {\n display 5 < 3\n } else if (false) {\n 3 + 2\n} else {\n display 4 + 6\n}\n',
+    /if \(true\) {\s*console\.log\(false\);\s*} else if \(false\) {\s*5;\s*} else {\s*console.log\(10\);\s*}/,
   ],
 
   andOr: [
@@ -118,6 +118,16 @@ const fixture = {
     'while (2 > 3) {\n 2+3\n}\n',
     '',
   ],
+
+  none: [
+    'oo is Num none\n',
+    /let oo_\d+ = null/,
+  ],
+
+  postfix: [
+    '(3+4)++\n',
+    '(((7) ++));',
+  ]
 }
 
 describe('The JavaScript generator', () => {

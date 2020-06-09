@@ -17,6 +17,7 @@ module.exports = class Program {
   }
 
   gen() {
-    return beautify(this.stmts.map((s) => (s ? `${s.gen()};` : '')).join(''), { indentSize: 2 })
+    // I think beautify is adding spaces in between postfix and prefix ops and operands
+    return beautify(this.stmts.map((s) => s ? `${s.gen()};` : '').join(''), { indentSize: 2 })
   }
 }
