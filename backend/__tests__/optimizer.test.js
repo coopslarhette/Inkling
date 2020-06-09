@@ -65,17 +65,17 @@ const fixture = {
   ],
 
   callArguments: [
-    String.raw`num sum(num x, num y, num z):
-  return x + y + z
-sum(2 * 4, 6 - 9, 12 % 5)`,
+    'function sum(x is Num, y is Num, z is Num) is Num {\n'
+    + 'gimme x + y + z\n}\n'
+    + 'sum(2 * 4, 6 - 9, 12 % 5)\n',
     /function sum_(\d+)\(x_(\d+), y_(\d+), z_(\d+)\) \{\s*return \(\(x_\2 \+ y_\3\) \+ z_\4\);\s*\};\s*sum_\1\(8, -3, 2\);/,
   ],
 
-  fromLoop: [
-    String.raw`for i from (3 - 3) to (20 / 2) by 2:
-  print(2 - 3)
-  print("toal is" + " cool")`,
-    /for \(let i_(\d+) = 0; i_\1 <= 10; i_\1 \+= 2\) \{\s*console\.log\(-1\);\s*console\.log\("toal is cool"\);\s*\};/,
+  forLoop: [
+    'for i in [3-2, 3-1, 3-0] {\n'
+  + 'display 2 - 3\n'
+  + 'display "toal is" + " cool"\n}\n',
+    /for \(const i_\d+ of \[1, 2, 3\]\) {\s*console\.log\(-1\);\s*console\.log\("toal is cool"\);\s*};/,
   ],
 
   listDeclarationAndSubscriptedExpression: [

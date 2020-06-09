@@ -36,9 +36,15 @@ module.exports = class ForLoop {
     this.body.analyze(bodyContext)
   }
 
+  optimize() {
+    this.body = this.body.optimize()
+    this.collection = this.collection.optimize()
+    return this
+  }
+
   gen() {
     const i = genHelp.javaScriptId(this.id)
-    const loopControl = `for (let ${i} of ${this.collection.gen()})`
+    const loopControl = `for (const ${i} of ${this.collection.gen()})`
     const body = this.body.gen()
     return `${loopControl} {${body}}`
   }
