@@ -47,8 +47,9 @@ const fixture = {
     + '2 < 3\n '
     + '2 >= 3\n'
     + '2 > 3\n'
+    + '0 - 2\n'
     + 'true and true\n}\n',
-    /if \(false\) \{\s*false;\s*true;\s*0;\s*1;\s*2;\s*0;\s*0;\s*3;\s*3;\s*4;\s*5;\s*6;\s*7;\s*9;\s*true;\s*true;\s*false;\s*false;\s*true;\s*\};/,
+    /if \(false\) \{\s*false;\s*true;\s*0;\s*1;\s*2;\s*0;\s*0;\s*3;\s*3;\s*4;\s*5;\s*6;\s*7;\s*9;\s*true;\s*true;\s*false;\s*false;\s*- 2;\s*true;\s*\};/, // idk why space between neg and 2 here
   ],
 
   unaryExpressions: [
@@ -60,7 +61,7 @@ const fixture = {
     'a is Num 12 * 10\n b is Text "apple" + "sauce"\n c is Bool true and false\n'
     + 'a is 8 / 4\n'
     + 'b is "sauce" + "apple"\n'
-    + 'c is true or false\n',
+    + 'c is (true or false) and (false or true)\n',
     /let a_(\d+) = 120;\s*let b_(\d+) = "applesauce";\s*let c_(\d+) = false;\s*a_\1 = 2;\s*b_\2 = "sauceapple";\s*c_\3 = true;/,
   ],
 
@@ -73,8 +74,8 @@ const fixture = {
 
   forLoop: [
     'for i in [3-2, 3-1, 3-0] {\n'
-  + 'display 2 - 3\n'
-  + 'display "toal is" + " cool"\n}\n',
+    + 'display 2 - 3\n'
+    + 'display "toal is" + " cool"\n}\n',
     /for \(const i_\d+ of \[1, 2, 3\]\) {\s*console\.log\(-1\);\s*console\.log\("toal is cool"\);\s*};/,
   ],
 

@@ -63,7 +63,11 @@ module.exports = class BinaryExpression {
     if (this.op === '*' && check.isOne(this.left)) return this.right
     if (check.bothBoolLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      return this.op === 'and' ? check.newLiteral(x && y) : check.newLiteral(x || y)
+      const ops = {
+        and: check.newLiteral(x && y),
+        or: check.newLiteral(x || y),
+      }
+      return ops[this.op]
     }
     if (check.bothLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
