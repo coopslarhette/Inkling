@@ -19,11 +19,11 @@ module.exports = class SetExpression {
   }
 
   optimize() {
-    this.members.forEach((m) => m.optimize())
+    this.members = this.members.map((m) => m.optimize())
     return this
   }
 
   gen() {
-    return `new Set(${this.members.map((member) => member.gen())})`
+    return `new Set([${this.members.map((member) => member.gen())}])`
   }
 }
