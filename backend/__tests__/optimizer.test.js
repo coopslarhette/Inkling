@@ -127,7 +127,7 @@ const fixture = {
   postfix: [
     '(3+4)++\n',
     '(((7) ++));',
-  ]
+  ],
 }
 
 describe('The JavaScript generator', () => {
