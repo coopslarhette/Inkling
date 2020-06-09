@@ -76,6 +76,8 @@ const errors = [
     'function getSetOfTexts() is Set<Text> {\n  gimme ["!", "1", "dsa"]\n}\n texts is Set<Text> getSetOfTexts()\n'],
   ['can\'t iterate nums', 'for i in 5 {\n display 3\n}\n'],
   ['can\'t use math operators with bools', 'true + false\ntrue - false\n'],
+  ['can\'t subtract strings', '"hello" - "a"\n '],
+  ['can\'t multiply strings', '"hello" * "a"\n '],
 
   // add necessary types for each node
   // pow check for return type
