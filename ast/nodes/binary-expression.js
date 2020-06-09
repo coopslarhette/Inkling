@@ -48,46 +48,39 @@ module.exports = class BinaryExpression {
     if (this.op === '+' && check.bothStringLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
       const xy = (x + y).replace(/"+/g, '')
-      return this.newNode(`${xy}`) // xy use to be wrapped in quotes: "${xy}", may need the quotes idk works as of 6/8
+      return check.newLiteral(`${xy}`) // xy use to be wrapped in quotes: "${xy}", may need the quotes idk works as of 6/8
     }
-    if (this.op === '!=') return this.newNode(this.left.value !== this.right.value)
-    if (this.op === '==') return this.newNode(this.left.value === this.right.value)
+    if (this.op === '!=') return check.newLiteral(this.left.value !== this.right.value)
+    if (this.op === '==') return check.newLiteral(this.left.value === this.right.value)
     if ((this.op === '+' || this.op === '-') && check.isZero(this.right)) return this.left
     if (this.op === '+' && check.isZero(this.left)) return this.right
     if (this.op === '+' && check.isNegative(this.right)) {
-      return this.newNode(this.left.value + this.right.value)
+      return check.newLiteral(this.left.value + this.right.value)
     }
-    if (this.op === '-' && check.isZero(this.left)) return this.newNode(`-${this.right.value}`)
-    if (this.op === '*' && (check.isZero(this.left) || check.isZero(this.right))) return this.newNode(0)
+    if (this.op === '-' && check.isZero(this.left)) return check.newLiteral(`-${this.right.value}`)
+    if (this.op === '*' && (check.isZero(this.left) || check.isZero(this.right))) return check.newLiteral(0)
     if (this.op === '*' && check.isOne(this.right)) return this.left
     if (this.op === '*' && check.isOne(this.left)) return this.right
     if (check.bothBoolLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      if (this.op === 'and') return this.newNode(x && y)
-      if (this.op === 'or') return this.newNode(x || y)
+      if (this.op === 'and') return check.newLiteral(x && y)
+      if (this.op === 'or') return check.newLiteral(x || y)
     } else if (check.bothLiterals(this)) {
       const [x, y] = [this.left.value, this.right.value]
-      if (this.op === '+') return this.newNode(x + y)
-      if (this.op === '-') return this.newNode(x - y)
-      if (this.op === '*') return this.newNode(x * y)
-      if (this.op === '/') return this.newNode(x / y)
-      if (this.op === '%') return this.newNode(x % y)
-      if (this.op === '<=') return this.newNode(x <= y)
-      if (this.op === '>=') return this.newNode(x >= y)
-      if (this.op === '<') return this.newNode(x < y)
-      if (this.op === '>') return this.newNode(x > y)
+      if (this.op === '+') return check.newLiteral(x + y)
+      if (this.op === '-') return check.newLiteral(x - y)
+      if (this.op === '*') return check.newLiteral(x * y)
+      if (this.op === '/') return check.newLiteral(x / y)
+      if (this.op === '%') return check.newLiteral(x % y)
+      if (this.op === '<=') return check.newLiteral(x <= y)
+      if (this.op === '>=') return check.newLiteral(x >= y)
+      if (this.op === '<') return check.newLiteral(x < y)
+      if (this.op === '>') return check.newLiteral(x > y)
     }
     return this
   }
 
   gen() {
     return `(${this.left.gen()} ${genHelp.makeOp(this.op)} ${this.right.gen()})`
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  newNode(exp) {
-    const node = new Literal(exp)
-    node.analyze()
-    return node
   }
 }

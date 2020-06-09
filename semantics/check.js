@@ -144,4 +144,10 @@ module.exports = {
   bothBoolLiterals(e) {
     return this.bothLiterals(e) && e.left.type === BoolType && e.right.type === BoolType
   },
+
+  newLiteral(exp) {
+    const node = new Literal(exp)
+    node.analyze()
+    return node
+  },
 }

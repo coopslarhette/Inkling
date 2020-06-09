@@ -52,20 +52,15 @@ const fixture = {
   ],
 
   unaryExpressions: [
-    String.raw`while (!false):
-  not true
-  3 + -2 - -9
-  -3 * 3`,
+    'while (!false) {\n !true\n 3 + -2 - -9\n  -3 * 3\n}\n',
     /while \(true\) {\s*false;\s*10;\s*- 9;\s*\};/,
   ],
 
   variableDeclarationAndAssignment: [
-    String.raw`num a = 12 * 10
-string b = "apple" + "sauce"
-boo c = true and false
-a = 8 / 4
-b = "sauce" + "apple"
-c = true or false`,
+    'a is Num 12 * 10\n b is Text "apple" + "sauce"\n c is Bool true and false\n'
+    + 'a is 8 / 4\n'
+    + 'b is "sauce" + "apple"\n'
+    + 'c is true or false\n',
     /let a_(\d+) = 120;\s*let b_(\d+) = "applesauce";\s*let c_(\d+) = false;\s*a_\1 = 2;\s*b_\2 = "sauceapple";\s*c_\3 = true;/,
   ],
 

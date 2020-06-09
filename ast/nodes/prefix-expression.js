@@ -29,6 +29,9 @@ module.exports = class PrefixExpression {
     if (this.op === '-' && this.operand instanceof Literal) {
       return new Literal(-this.operand.value)
     }
+    if (this.op === '!' && this.operand instanceof Literal) {
+      return check.newLiteral(!this.operand.value)
+    }
     return this
   }
 
