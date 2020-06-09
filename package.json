@@ -5,7 +5,8 @@
   "main": "Inkling.ohm",
   "scripts": {
     "test": "jest --collect-coverage",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "run": "eslint . --fix && jest --collect-coverage"
   },
   "repository": {
     "type": "git",
