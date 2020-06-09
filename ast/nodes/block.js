@@ -1,4 +1,4 @@
-const { ReturnStatement } = require('./return-statement')
+const ReturnStatement = require('./return-statement')
 
 module.exports = class Block {
   constructor(statements) {
