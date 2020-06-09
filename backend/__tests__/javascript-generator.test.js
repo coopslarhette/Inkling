@@ -35,7 +35,7 @@ const fixture = {
   WhileLoop: ['while (3 < 4) {\n 3 + 4\n}\n', 'while ((3<4)) {(3+4);};'],
   ForLoop: [
     'for g in [1,2,3] {\n g + 3\n}\n',
-    'for (let g_7 of [1,2,3]) {(g_7+3);};',
+    'for (const g_7 of [1,2,3]) {(g_7+3);};',
   ],
   Functions: [
     'function foo(x is Num) is Num {\ngimme x * 3\n}\n',

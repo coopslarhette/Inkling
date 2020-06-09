@@ -79,15 +79,8 @@ const fixture = {
   ],
 
   listDeclarationAndSubscriptedExpression: [
-    String.raw`list<num> l = [1 - 1, -2 + 3, 5 // 2]
-l[12 - 10] = 12 % 7`,
+    'l is List<Num> [1 - 1, -2 + 3, 4 / 2]\n l[2] is 12 % 7\n',
     /let l_(\d+) = \[\s*0,\s*1\s*,\s*2\s*\];\s*l_\1\[2\] = 5;/,
-  ],
-
-  breakStatement: [
-    String.raw`for i from 0 to 1:
-  break`,
-    /for \(let i_(\d+) = 0; i_\1 <= 1; i_\1 \+= 1\) \{\s*break;\s*\};/,
   ],
 
   dictExpression: [
