@@ -10,8 +10,8 @@ module.exports = class SubscriptedVarExp {
 
   analyze(context) {
     this.callee = context.lookupValue(this.id.id)
-    const listOrDict = this.callee || this.callee.exp
-    check.isListOrDict(listOrDict)
+    // const listOrDict = this.callee || this.callee.exp  may need this idk, works w/out for now
+    check.isListOrDict(this.callee)
     check.containsKey(this.callee, this.key.value)
     this.type = this.callee.type.memberType
   }
