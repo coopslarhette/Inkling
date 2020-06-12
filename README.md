@@ -19,7 +19,7 @@ Inkling can currently be transpiled to runnable JavaScript, to do this follow di
     - flags:
         - the `-a` flag will show the abstract syntax tree after parsing your code and then stop
         - the `-i` flag will generate and show the decorated abstract syntax tree and then stop
-        - the `-o` flag optimizes your the .js code about to be written to the console (useless if used with other flags)
+        - the `-o` flag optimizes the .js code about to be written to the console (useless if used with other flags)
 
 # Features
 
