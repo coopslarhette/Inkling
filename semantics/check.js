@@ -4,7 +4,6 @@ const Literal = require('../ast/nodes/literal')
 const ListType = require('../ast/nodes/list-type')
 const SetType = require('../ast/nodes/set-type')
 const DictType = require('../ast/nodes/dict-type')
-// const IdentifierExpression = require('../ast/identifier-expression')
 
 const {
   NumType,
@@ -82,21 +81,22 @@ module.exports = {
   },
 
   sameType(arg, param) {
-    // fug we never allow/check for lists, sets, or dicts here oopsieee
+    // fug we never allow/check for lists, sets, or dicts here oopsieee,
+    // means we don't allow them in function calls
     if (param.type.id === 'Num') {
       doCheck(
         typeof arg.value === 'number' || arg.type === NumType,
         'Type mismatch NUM',
       )
     } else if (param.type.id === 'Text') {
-      doCheck(typeof arg.value === 'string' || arg.type === TextType,
+      doCheck(arg.type === TextType,
         'Type mismatch TEXT')
     } else if (param.type.id === 'Bool') {
-      doCheck(typeof arg.value === 'boolean' || arg.type === BoolType,
+      doCheck(arg.type === BoolType,
         'Type mismatch BOOL')
     }
     // else {
-    //   // TODO
+    //   // TODO collections
     //   throw new Error('unsupported argument type')
     // }
   },
