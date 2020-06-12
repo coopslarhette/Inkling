@@ -6,8 +6,4 @@ module.exports = class PrimitiveType {
   // eslint-disable-next-line no-unused-vars,class-methods-use-this
   analyze(context) {
   }
-
-  optimize() {
-    return this
-  }
 }
