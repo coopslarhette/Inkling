@@ -133,6 +133,11 @@ const fixture = {
     'guh is Num 5\n j is Num 6 if guh < 2 else 9\n',
     /let guh_(\d+) = 5;\s*let j_\d+ = \(guh_\1 < 2\) \? 6 : 9;/,
   ],
+
+  powExp: [
+    '3^0\n 1^3\n 3^1\n (3*2)^(4+2)\n',
+    /1;\s*1;\s*3;\s*6 \*\* 6;/,
+  ],
 }
 
 describe('The JavaScript generator', () => {

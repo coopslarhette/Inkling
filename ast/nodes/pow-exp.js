@@ -21,11 +21,11 @@ module.exports = class PowExp {
   optimize() {
     this.left = this.left.optimize()
     this.right = this.right.optimize()
-    if (this.right === 0) {
+    if (this.right.value === 0) {
       return new Literal(1)
     }
-    if (this.left === 1 || this.left === 0 || this.right === 1) {
-      return new Literal(this.left)
+    if (this.left.value === 1 || this.left.value === 0 || this.right.value === 1) {
+      return new Literal(this.left.value)
     }
     return this
   }
