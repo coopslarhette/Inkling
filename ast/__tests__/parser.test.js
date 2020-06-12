@@ -16,7 +16,6 @@ const Block = require('../nodes/block')
 const Call = require('../nodes/call')
 const DictExpression = require('../nodes/dict-expression')
 const DictType = require('../nodes/dict-type')
-const FieldVarExp = require('../nodes/field-var-expression')
 const ForLoop = require('../nodes/for-loop')
 const FuncDecStmt = require('../nodes/func-dec-statement')
 const IdentifierExpression = require('../nodes/identifier-expression')
@@ -470,17 +469,6 @@ const fixture = {
         ),
         new PrefixExpression('-', new Literal(1)),
         new Literal(1),
-      ),
-    ]),
-  ],
-
-  fieldVarExp: [
-    // Similar to Call it wants the FieldVarExp to be wrapped in a IdentifierExpression
-    String.raw`inkTeam.sam
-    `,
-    new Program([
-      new IdentifierExpression(
-        new FieldVarExp(new IdentifierExpression('inkTeam'), 'sam'),
       ),
     ]),
   ],

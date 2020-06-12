@@ -12,7 +12,6 @@ const Block = require('./nodes/block')
 const Call = require('./nodes/call')
 const DictExpression = require('./nodes/dict-expression')
 const DictType = require('./nodes/dict-type')
-const FieldVarExp = require('./nodes/field-var-expression')
 const ForLoop = require('./nodes/for-loop')
 const FuncDecStmt = require('./nodes/func-dec-statement')
 const IdentifierExpression = require('./nodes/identifier-expression')
@@ -190,9 +189,6 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   },
   Exp6_dict(_1, keyValue, _2) {
     return new DictExpression(keyValue.ast())
-  },
-  VarExp_field(id, _dotOperator, field) {
-    return new FieldVarExp(id.ast(), field.ast())
   },
   VarExp_subscripted(id, _open, key, _close) {
     return new SubscriptedVarExp(id.ast(), key.ast())
