@@ -2,7 +2,6 @@ const util = require('util')
 const deepEqual = require('deep-equal')
 const Literal = require('../ast/nodes/literal')
 const ListType = require('../ast/nodes/list-type')
-const SetType = require('../ast/nodes/set-type')
 const DictType = require('../ast/nodes/dict-type')
 
 const {
@@ -22,11 +21,9 @@ module.exports = {
   isIterable(type) {
     doCheck(
       type.constructor === ListType
-      || type.constructor === SetType
       || type.constructor === DictType
       || type === TextType
       || type === ListType
-      || type === SetType
       || type === DictType,
       'Not a list, set, dict or text',
     )

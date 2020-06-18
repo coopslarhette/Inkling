@@ -1,6 +1,5 @@
 const PrimitiveType = require('../ast/nodes/primitive-type')
 const ListType = require('../ast/nodes/list-type')
-const SetType = require('../ast/nodes/set-type')
 const DictType = require('../ast/nodes/dict-type')
 const FuncDecStmt = require('../ast/nodes/func-dec-statement')
 const Param = require('../ast/nodes/param')
@@ -46,12 +45,6 @@ const listFunctions = [
   // new FuncDecStmt("length", [new Param("s", ListType)], NumType),
 ]
 
-const setFunctions = [
-  new FuncDecStmt('add', [new Param('value', this.type)], SetType),
-  new FuncDecStmt('remove', [new Param('index', NumType)], SetType),
-  new FuncDecStmt('length', [new Param('s', SetType)], NumType),
-]
-
 // keyType and valueType are made up, may be something we need to add for these functions
 const dictFunctions = [
   new FuncDecStmt(
@@ -75,7 +68,6 @@ const functions = [
   ...textFunctions,
   ...mathFunctions,
   ...listFunctions,
-  ...setFunctions,
   ...dictFunctions,
 ]
 
@@ -91,6 +83,5 @@ module.exports = {
   textFunctions,
   mathFunctions,
   listFunctions,
-  setFunctions,
   dictFunctions,
 }

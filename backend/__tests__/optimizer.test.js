@@ -89,11 +89,6 @@ const fixture = {
     /let numbersAreCool_\d+ = \{\s*1: 1,\s*1: 4\s*\};/,
   ],
 
-  setExpression: [
-    'superSet is Set<Num> {1 + 4, 3 + 3, 12 * 4}\n',
-    /let superSet_\d+ = new Set\(\[\s*5,\s*6,\s*48\s*\]\);/,
-  ],
-
   functionAndReturn: [
     'function arithmetic() is Num {\n gimme 1 + 4 - (3 * 3) / (4 / 3)\n}\n',
     /function arithmetic_\d+\(\) \{\s*return -1.75;\s*\};/,

@@ -14,10 +14,8 @@ for  var1 in "Hello" {
 }
 b is Num 5
 a is always Text  "Hello"
-c is Set<Text> {"this", "a", "b"}
 e is List<Text> ["this", "a", "b"]
 g is Text "hello this is some sample text"
-h is Set<Num> {1, 2, 3, 5, 6}
 i is Dict<Text, Text> {"name":"Marco", "school":"LMU"}
 ageDictionary is Dict<Text, Num> {"Sam": 21, "Talia": 20}
 z is Bool true
@@ -98,9 +96,7 @@ function fizzbuzz(x is Num) is Void {
     }
   }
 }
-for a in {1,2,3} {
-  display a
-}
+
 k5 is List<Num> [1,2,3]
 u is Num k5[1]
 t is Num none
@@ -117,9 +113,6 @@ for a in [1,2,3] {
   u is a
 }
 for a in {1:3,2:1,3:3} {
-  u is a
-}
-for a in {1,2,3} {
   u is a
 }
 

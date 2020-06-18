@@ -28,8 +28,6 @@ const PrefixExpression = require('./nodes/prefix-expression')
 const Print = require('./nodes/print')
 const Program = require('./nodes/program')
 const ReturnStatement = require('./nodes/return-statement')
-const SetExpression = require('./nodes/set-expression')
-const SetType = require('./nodes/set-type')
 const SubscriptedVarExp = require('./nodes/subscripted-var-expression')
 const Ternary = require('./nodes/ternary')
 const VarDeclaration = require('./nodes/var-declaration')
@@ -183,9 +181,6 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   Exp6_list(_1, expressions, _2) {
     return new ListExpression(expressions.ast())
   },
-  Exp6_set(_1, expressions, _2) {
-    return new SetExpression(expressions.ast())
-  },
   Exp6_dict(_1, keyValue, _2) {
     return new DictExpression(keyValue.ast())
   },
@@ -209,9 +204,6 @@ const astGenerator = grammar.createSemantics().addOperation('ast', {
   },
   List(_1, type, _2) {
     return new ListType(type.ast())
-  },
-  Set(_1, type, _2) {
-    return new SetType(type.ast())
   },
   Dict(_1, keyType, _2, valueType, _3) {
     return new DictType(keyType.ast(), valueType.ast())

@@ -2,7 +2,6 @@ const check = require('../../semantics/check')
 const VarDeclaration = require('./var-declaration')
 const ListType = require('./list-type')
 const DictType = require('./dict-type')
-const SetType = require('./set-type')
 const genHelp = require('../../backend/generator-helpers')
 
 module.exports = class ForLoop {
@@ -19,7 +18,7 @@ module.exports = class ForLoop {
     this.collection.analyze(context)
     check.isIterable(this.collection.type)
     const typeToCheck = this.collection.type.constructor
-    if (typeToCheck === ListType || typeToCheck === SetType) {
+    if (typeToCheck === ListType) {
       type = this.collection.type.memberType
     } else if (typeToCheck === DictType) {
       type = this.collection.type.keyType

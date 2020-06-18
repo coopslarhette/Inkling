@@ -33,8 +33,6 @@ const PrimitiveType = require('../nodes/primitive-type')
 const Print = require('../nodes/print')
 const Program = require('../nodes/program')
 const ReturnStatement = require('../nodes/return-statement')
-const SetExpression = require('../nodes/set-expression')
-const SetType = require('../nodes/set-type')
 const SubscriptedVarExp = require('../nodes/subscripted-var-expression')
 const Ternary = require('../nodes/ternary')
 const VarDeclaration = require('../nodes/var-declaration')
@@ -105,18 +103,6 @@ const fixture = {
           new KeyValuePair(new Literal('Sam'), new Literal(21)),
           new KeyValuePair(new Literal('Talia'), new Literal(20)),
         ]),
-      ),
-    ]),
-  ],
-  setDeclarations: [
-    String.raw`aSetOfNums is Set<Num> {1, 2}
-   `,
-    new Program([
-      new VarDeclaration(
-        'aSetOfNums',
-        false,
-        new SetType(new PrimitiveType('Num')),
-        new SetExpression([new Literal(1), new Literal(2)]),
       ),
     ]),
   ],
@@ -493,6 +479,14 @@ const fixture = {
     `,
     new Program([
       new Assignment(new IdentifierExpression('sam'), new Literal('kewl')),
+    ]),
+  ],
+
+  emptyList: [
+    String.raw`mapped is List<Num> []
+    `,
+    new Program([
+      new VarDeclaration('mapped', false, new ListType(new PrimitiveType('Num')), new ListExpression([])),
     ]),
   ],
 }

@@ -1,5 +1,6 @@
 const check = require('../../semantics/check')
 const DictType = require('./dict-type')
+const NoneType = require('../../semantics/builtins')
 
 module.exports = class DictExpression {
   constructor(keyValuePairs) {
@@ -18,7 +19,7 @@ module.exports = class DictExpression {
       })
       this.type = new DictType(keyType, valueType)
     } else {
-      // TODO
+      this.type = NoneType
     }
   }
 

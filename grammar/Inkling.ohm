@@ -50,8 +50,7 @@ Inkling {
                 |  numlit
                 |  nonelit
                 |  VarExp
-                 |  "[" ListOf<Exp, ","> "]"                                -- list
-                |  "{" ListOf<Exp, ","> "}"                                 -- set
+                |  "[" ListOf<Exp, ","> "]"                                 -- list
                 |  "{" ListOf<KeyValue, ","> "}"                            -- dict
     KeyValue    =  Exp ":" Exp
     keyword     =  ( "while " | "if " | "else " | "is " | "true " | "false " | "for " | "do " | "always " | "display"

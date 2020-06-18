@@ -12,11 +12,6 @@ const errors = [
   ['use of undeclared variable', 'a is 1\n'],
   ['assignment to constant', 'b is always Num 5\nb is 1\n'],
   ['List with inconsistent types', 'c is List<Text> ["this", 2, "b"]\n'],
-  ['Set with inconsistent types', 'd is Set<Text> {"this", 2, "b"}\n'],
-  [
-    'Assign new set with wrong types',
-    'd2 is Set<Text> {"this", "hello", "b"}\n d2 is {5, 3, 2}\n',
-  ],
   [
     'Dict with inconsistent types',
     'ageDictionary is Dict<Text, Text> {"Sam": 21, "Talia": 20}\n',
@@ -71,9 +66,6 @@ const errors = [
   ['assigning to list with wrong member type', 'ong is List<Text> [1,2,3]\n'],
   ['assigning to list with wrong member type from function call',
     'function f(x is Num) is List<Num> {\n gimme \n }\n wew is List<Text> f(2)\n'],
-  [
-    'returning a list in function that should return a set',
-    'function getSetOfTexts() is Set<Text> {\n  gimme ["!", "1", "dsa"]\n}\n texts is Set<Text> getSetOfTexts()\n'],
   ['can\'t iterate nums', 'for i in 5 {\n display 3\n}\n'],
   ['can\'t use math operators with bools', 'true + false\ntrue - false\n'],
   ['can\'t subtract strings', '"hello" - "a"\n '],
