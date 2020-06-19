@@ -70,10 +70,8 @@ const errors = [
   ['can\'t use math operators with bools', 'true + false\ntrue - false\n'],
   ['can\'t subtract strings', '"hello" - "a"\n '],
   ['can\'t multiply strings', '"hello" * "a"\n '],
-
-  // add necessary types for each node
-  // pow check for return type
-  // in functions check
+  ['can\'t index empty lists', 'emptyList is List<Num> []\n emptyList[0]\n'],
+  ['can\'t index empty dicts', 'emptyDict is Dict<Num, Num> {}\n emptyDict[0]\n'],
 ]
 
 describe('The semantic analyzer', () => {
