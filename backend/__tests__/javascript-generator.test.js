@@ -2,7 +2,7 @@
  * JavaScript Code Generator Tests
  *
  * These tests check that the JavaScript generator produces the target
- * JavaScript that we expect.
+ * JavaScript that we expect. note: no optimization is done.
  */
 
 const parse = require('../../ast/parser')
@@ -18,30 +18,30 @@ const fixture = {
     /let c_\d+ = {\s*"name": "Marco",\s*"school": "LMU"\s*};/,
   ],
   AssignNum: ['e is Num 5\n e is 6\n', /let e_(\d+) = 5;\s*e_\1 = 6;/],
-  If: ['if(true) {\n3 + 4\n}\n', /if(true) {(3 \+ 4);};/],
+  If: ['if(true) {\n3 + 4\n}\n', /if \(true\) {\s*\(3 \+ 4\);\s*};/],
   IfElse: [
     'if (true) {\n3 + 4\n} else {\n4+3\n}\n',
-    /if \(true\) {\(3 \+ 4\);}else{\(4\+3\);};/,
+    /if \(true\) {\s*\(3 \+ 4\);\s*} else {\s*\(4 \+ 3\);\s*};/,
   ],
   IfElseIfElse: [
-    'if (true) {\n3 + 4\n} else if (3 < 4) {\n 3 - 4\n} else {\n4+3\n}\n',
-    /if \(true\) {\(3 \+ 4\);}else if \((3 < 4\)) {\(3 - 4\);}else{\(4\+3\);};/,
+    'if (true) {\n3 + 4\n} else if (3 < 4) {\n 3 - 4\n} else {\n4 + 3\n}\n',
+    /if \(true\) {\s*\(3 \+ 4\);\s*} else if \(\(3 < 4\)\) {\s*\(3 - 4\);\s*} else {\s*\(4 \+ 3\);\s*};/,
   ],
-  Ternary: ['f is Num 5 if 3 < 4 else 6\n', /let f_\d+ = (3 < 4) ? 5 : 6;/],
-  WhileLoop: ['while (3 < 4) {\n 3 + 4\n}\n', /while \(\(3<4\)\) {\(3\+4\);};/],
+  Ternary: ['f is Num 5 if 3 < 4 else 6\n', /let f_\d+ = \(3 < 4\) \? 5 : 6;/],
+  WhileLoop: ['while (3 < 4) {\n 3 + 4\n}\n', /while \(\(3 < 4\)\) {\s*\(3 \+ 4\);\s*};/],
   ForLoop: [
     'for g in [1,2,3] {\n g + 3\n}\n',
-    /for \(const g_(\d+) of \[1,2,3\]\) {\(g_\1\+3\);};/,
+    /for \(const g_(\d+) of \[1, 2, 3\]\) {\s*\(g_\1 \+ 3\);\s*};/,
   ],
   Functions: [
     'function foo(x is Num) is Num {\ngimme x * 3\n}\n',
-    /function foo_\d+\(x_(\d+)\) {return \(x_\1\*3\);};/,
+    /function foo_\d+\(x_(\d+)\) {\s*return \(x_\1 \* 3\);\s*};/,
   ],
   SubscriptedVarExp: [
     'h is List<Num> [1,2,3]\n h[1] is 5\n',
-    /let h_(\d+) = \[1,2,3\];\n h_\1\[1\] = 5;/,
+    /let h_(\d+) = \[1, 2, 3\];\s*h_\1\[1\] = 5;/,
   ],
-  pow: ['pow(2, 2)\n', /2\*\*2;/],
+  pow: ['pow(2, 2)\n', /2 \*\* 2;/],
   length: ['length("hello")\n', /"hello".length;/],
   slice: ['slice("hello",1,2)\n', /"hello".slice\(1, 2\);/],
   charAt: ['charAt("hello",1)\n', /"hello".charAt\(1\);/],
@@ -50,18 +50,18 @@ const fixture = {
   xProcess: ['xProcess(3)\n', /process.exit\(3\);/],
   random: ['random(1, 10)\n', /Math.floor\(Math.random\(\) \* 10 \+ 1\);/],
   range: ['range(0, 10)\n', /Array\(10 - 0 \+ 1\).fill\(\).map\(\(_, idx\) => 0 \+ idx\);/],
-  builtins: ['pow(2, 2)\n length("hello")\n', /2\*\*2;"hello".length;/],
+  builtins: ['pow(2, 2)\n length("hello")\n', /2 \*\* 2;\s*"hello"\.length;/],
   ListDeclaration: [
     'r is List<Text> ["name", "Marco", "school", "LMU"]\n',
-    /let r_11 = \["name", "Marco", "school", "LMU"\];/,
+    /let r_\d+ = \["name", "Marco", "school", "LMU"\];/,
   ],
   ListAdd: [
     'k is List<Text> ["name", "Marco", "school", "LMU"]\nadd(k, "guy")\n',
-    /let k_12 = \["name", "Marco", "school", "LMU"\];\n k_12.push\("guy"\);/,
+    /let k_(\d+) = \["name", "Marco", "school", "LMU"\];\s*k_\1\.push\("guy"\);/,
   ],
   ListPrependAndInsert: [
     'm is List<Num> [1]\nprepend("m", 2)\ninsert(m, 0, 4)\n',
-    /let m_13 = \[1\]; m.prepend\(2\); m_13.splice\( 0, 0, 4 \);/,
+    /let m_(\d+) = \[1\];\s*m_\1\.prepend\(2\);\s*m_\1\.splice\(0, 0, 4\);/,
   ],
   ListRemove: ['j is List<Num> [1]\n remove(j)\n', /let j_14 = \[1\]; j_14.pop\(\);/],
   FunctionCall: [
