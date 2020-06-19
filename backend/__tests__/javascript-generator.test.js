@@ -63,18 +63,18 @@ const fixture = {
     'm is List<Num> [1]\nprepend("m", 2)\ninsert(m, 0, 4)\n',
     /let m_(\d+) = \[1\];\s*m_\1\.prepend\(2\);\s*m_\1\.splice\(0, 0, 4\);/,
   ],
-  ListRemove: ['j is List<Num> [1]\n remove(j)\n', /let j_14 = \[1\]; j_14.pop\(\);/],
+  ListRemove: ['j is List<Num> [1]\n remove(j)\n', /let j_(\d+) = \[1\];\s*j_\1.pop\(\);/],
   FunctionCall: [
     'function Greeting (n is Text) is Void {display n\n}\n Greeting("hello")\n',
-    /function Greeting_15\(n_16\){console.log\(n_16\);};\n Greeting_15\("hello"\);/,
+    /function Greeting_(\d+)\(n_(\d+)\) {\s*console.log\(n_\2\);\s*};\s*Greeting_\1\("hello"\);/,
   ],
   PostFix: [
     'ja is Num 5\n ja++\nja--\n',
-    /let ja_17 = 5; \(\(\(ja_17\)\+\+\)\);\(\(\(ja_17\)--\)\);/,
+    /let ja_(\d+) = 5;\s*\(\(\(ja_\1\) \+\+\)\);\s*\(\(\(ja_\1\) --\)\);/,
   ],
   Null: [
     'ooh is Num none\n',
-    /let ooh_18 = null;/,
+    /let ooh_\d+ = null;/,
   ],
 }
 
