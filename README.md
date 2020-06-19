@@ -35,7 +35,6 @@ Inkling can currently be transpiled to runnable JavaScript, to do this follow di
 - Bool
 - List
 - Dict
-- Set
 
 ## Operators
 
@@ -70,7 +69,7 @@ Inkling can currently be transpiled to runnable JavaScript, to do this follow di
 - Having a `return` in a function that has a return type of `Void`
 - Not returning anything in a function that is declared to return something
 - Returning something that is not of the type declared in the function signature
-- Trying to iterate through something that is not a list, set, dictionary, or string in a `for` loop
+- Trying to iterate through something that is not a list, dictionary, or string in a `for` loop
 
 ## Optimizations
 
@@ -115,7 +114,7 @@ x is always (x is Text) is Num => {
 
 ## Ternary
 
-`x < 0 ? gimme "negative" : gimme "positive"`
+`display "negative" if x < 0 else display "positive"`
 
 ## Conditional
 
@@ -160,7 +159,7 @@ fyi: if you need to leave a multi-line
 
 ```
 function fibonacci(x is Num) is Num {
-    if(x <= 1) {
+    if (x <= 1) {
         gimme x
     }
     gimme fibonacci(x - 1) + fibonacci(x - 2)
@@ -184,7 +183,7 @@ function fibonacci(x) {
 
 ```
 function findFactorial(x is Num) is Num {
-    if(x == 0 or x == 1) {
+    if (x == 0 or x == 1) {
         gimme x
     }
     gimme x * findFactorial(x - 1)
@@ -208,8 +207,8 @@ function findFactorial(x) {
 
 ```
 function fizzbuzz(x is Num) is void {
-    for i is Num in range(0,x) {
-        if (i%3 == 0 and i%5 == 0) {
+    for i is Num in range(0, x) {
+        if (i % 3 == 0 and i % 5 == 0) {
             display "fizzbuzz"
         } else if (i % 3 == 0) {
             display "fizz"
@@ -240,36 +239,6 @@ function  fizzBuzz(x) {
 }
 ```
 
-### Is Prime Program
-
-#### Inkling Example
-
-```
-function isPrime(x is Num) is Num {
-    start is Num 2
-    while(start <= x^0.5) {
-        if (x % start++ < 1) {
-            gimme false
-        }
-    }
-    gimme x > 1
-}
-```
-
-#### JavaScript Example
-
-```
-function  isPrime(x) {
-    var start = 2;
-    while (start <= Math.sqrt(x)) {
-        if (x % start++ < 1) {
-            return false;
-        }
-    }
-    return x > 1;
-}
-```
-
 ### Find Greatest Program
 
 #### Inkling Example
@@ -289,10 +258,10 @@ function findGreatest(a is Num, b is Num, c is Num) is Num {
 #### JavaScript Example
 
 ```
-function  findGreatest(a, b, c) {
+function findGreatest(a, b, c) {
     if (a >= b && a >= c) {
         return x;
-    } else if ( b >= a && b >= c) {
+    } else if (b >= a && b >= c) {
         return b;
     } else {
         return c;
@@ -306,7 +275,7 @@ function  findGreatest(a, b, c) {
 
 ```
 function negativeChecker(x is Num) is Bool {
-    gimme x < 0 ? true : false
+    gimme true if x < 0 else false
 }
 ```
 
