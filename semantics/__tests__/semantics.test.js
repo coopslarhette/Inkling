@@ -134,6 +134,8 @@ function food(x is Num, y is Text, g is Bool) is Void {
   display y
 }
 food(3, "weW", true)
+ge is {}
+k5 is []
 `
 
 describe('The semantic analyzer', () => {
