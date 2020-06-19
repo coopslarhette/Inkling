@@ -15,7 +15,7 @@ Inkling can currently be transpiled to runnable JavaScript, to do this follow di
 1. Install [Node.js](https://nodejs.org/en/).
 2. Clone the project and run `$ npm install` and then `$ npm test` (in the project directory) to ensure everything is working.
 3. The command to compile inkling code is: `$ node inkling.js [-a] [-o] [-i] <filename>`, where:
-    - `<filename>` is your Inkling code; we have provided `test.ink` and more example files in `docs/`
+    - `<filename>` contains your Inkling code; we have provided `test.ink` and more example files in `docs/`
     - flags:
         - the `-a` flag will show the abstract syntax tree after parsing your code and then stop
         - the `-i` flag will generate and show the decorated abstract syntax tree and then stop
