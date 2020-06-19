@@ -11,13 +11,13 @@ const Context = require('../../semantics/context')
 const fixture = {
   Print: ['display "Hello, world"\n', /console.log\("Hello, world"\);/],
   Arithmetic: ['3 * -2 + 2\n', /\(\(3 \* \(-\(2\)\)\) \+ 2\);/],
-  VarDeclarationNum: ['a is Num 5\n', /let a_1 = 5;/],
-  VarDeclarationConstant: ['b is always Text "Hello"\n', /const b_2 = "Hello";/],
+  VarDeclarationNum: ['a is Num 5\n', /let a_\d+ = 5;/],
+  VarDeclarationConstant: ['b is always Text "Hello"\n', /const b_\d+ = "Hello";/],
   DictDeclaration: [
     'c is Dict<Text, Text> {"name":"Marco", "school":"LMU"}\n',
-    /let c_3 = {"name":"Marco", "school":"LMU"};/,
+    /let c_\d+ = {\s*"name": "Marco",\s*"school": "LMU"\s*};/,
   ],
-  AssignNum: ['e is Num 5\n e is 6\n', /let e_5 = 5;\n e_5 = 6;\n/],
+  AssignNum: ['e is Num 5\n e is 6\n', /let e_(\d+) = 5;\s*e_\1 = 6;/],
   If: ['if(true) {\n3 + 4\n}\n', /if(true) {(3 \+ 4);};/],
   IfElse: [
     'if (true) {\n3 + 4\n} else {\n4+3\n}\n',
@@ -27,19 +27,19 @@ const fixture = {
     'if (true) {\n3 + 4\n} else if (3 < 4) {\n 3 - 4\n} else {\n4+3\n}\n',
     /if \(true\) {\(3 \+ 4\);}else if \((3 < 4\)) {\(3 - 4\);}else{\(4\+3\);};/,
   ],
-  Ternary: ['f is Num 5 if 3 < 4 else 6\n', /let f_6 = (3 < 4) ? 5 : 6;/],
+  Ternary: ['f is Num 5 if 3 < 4 else 6\n', /let f_\d+ = (3 < 4) ? 5 : 6;/],
   WhileLoop: ['while (3 < 4) {\n 3 + 4\n}\n', /while \(\(3<4\)\) {\(3\+4\);};/],
   ForLoop: [
     'for g in [1,2,3] {\n g + 3\n}\n',
-    /for \(const g_7 of [1,2,3]\) {\(g_7\+3\);};/,
+    /for \(const g_(\d+) of \[1,2,3\]\) {\(g_\1\+3\);};/,
   ],
   Functions: [
     'function foo(x is Num) is Num {\ngimme x * 3\n}\n',
-    /function foo_8\(x_9\) {return \(x_9\*3\);};/,
+    /function foo_\d+\(x_(\d+)\) {return \(x_\1\*3\);};/,
   ],
   SubscriptedVarExp: [
     'h is List<Num> [1,2,3]\n h[1] is 5\n',
-    /let h_10 = \[1,2,3\];\n h_10[1] = 5;/,
+    /let h_(\d+) = \[1,2,3\];\n h_\1\[1\] = 5;/,
   ],
   pow: ['pow(2, 2)\n', /2\*\*2;/],
   length: ['length("hello")\n', /"hello".length;/],
@@ -53,17 +53,17 @@ const fixture = {
   builtins: ['pow(2, 2)\n length("hello")\n', /2\*\*2;"hello".length;/],
   ListDeclaration: [
     'r is List<Text> ["name", "Marco", "school", "LMU"]\n',
-    /let r_11 = ["name", "Marco", "school", "LMU"];/,
+    /let r_11 = \["name", "Marco", "school", "LMU"\];/,
   ],
   ListAdd: [
     'k is List<Text> ["name", "Marco", "school", "LMU"]\nadd(k, "guy")\n',
-    /let k_12 = ["name", "Marco", "school", "LMU"];\n k_12.push\("guy"\);/,
+    /let k_12 = \["name", "Marco", "school", "LMU"\];\n k_12.push\("guy"\);/,
   ],
   ListPrependAndInsert: [
     'm is List<Num> [1]\nprepend("m", 2)\ninsert(m, 0, 4)\n',
-    /let m_13 = [1]; m.prepend\(2\); m_13.splice\( 0, 0, 4 \);/,
+    /let m_13 = \[1\]; m.prepend\(2\); m_13.splice\( 0, 0, 4 \);/,
   ],
-  ListRemove: ['j is List<Num> [1]\n remove(j)\n', /let j_14 = [1]; j_14.pop\(\);/],
+  ListRemove: ['j is List<Num> [1]\n remove(j)\n', /let j_14 = \[1\]; j_14.pop\(\);/],
   FunctionCall: [
     'function Greeting (n is Text) is Void {display n\n}\n Greeting("hello")\n',
     /function Greeting_15\(n_16\){console.log\(n_16\);};\n Greeting_15\("hello"\);/,
