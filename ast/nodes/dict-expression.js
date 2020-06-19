@@ -1,6 +1,6 @@
 const check = require('../../semantics/check')
 const DictType = require('./dict-type')
-const NoneType = require('../../semantics/builtins')
+const { NoneType } = require('../../semantics/builtins')
 
 module.exports = class DictExpression {
   constructor(keyValuePairs) {
