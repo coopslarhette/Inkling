@@ -78,7 +78,7 @@ module.exports = {
   },
 
   sameType(arg, param) {
-    // fug we never allow/check for lists, sets, or dicts here oopsieee,
+    // TODO: fug we never allow/check for lists, sets, or dicts here oopsieee,
     // means we don't allow them in function calls
     if (param.type.id === 'Num') {
       doCheck(

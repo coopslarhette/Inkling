@@ -1,6 +1,6 @@
 const check = require('../../semantics/check')
 const ListType = require('./list-type')
-const NoneType = require('../../semantics/builtins')
+const { NoneType } = require('../../semantics/builtins')
 
 module.exports = class ListExpression {
   constructor(members) {
@@ -17,7 +17,7 @@ module.exports = class ListExpression {
         firstMemberType,
       ))
     } else {
-      this.type = new ListType(NoneType)
+      this.type = NoneType
     }
   }
 
