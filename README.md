@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/coopslarhette/Inkling.svg?branch=master)](https://travis-ci.com/coopslarhette/Inkling)
 # Inkling: An Intuitive Programming Language
 
 <p align="center"><img src="images/logo-inkling.png" alt="inkling logo" width="350"/></p>
