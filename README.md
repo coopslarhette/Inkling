@@ -79,7 +79,7 @@ Inkling can currently be transpiled to runnable JavaScript, to do this follow di
 - Unreachable Code for While Loop
 - Assignment Simplification 
 
-#Code Examples
+# Code Examples
 
 ## Variable Declaration
 
